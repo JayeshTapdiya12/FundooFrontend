@@ -1,9 +1,25 @@
-import React from 'react'
+import { useState } from 'react'
 import '../Style/signUp.css';
 import google from '../Assests/signupPhoto.webp'
 import { Container, TextField, Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
 
-export default function signup() {
+export default function SignUp() {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+    const [cPassword, setCPassword] = useState('')
+
+
+    const submit = () => {
+        if (password === cPassword) {
+            alert(firstName, lastName, email, password)
+        } else {
+            alert("password doesn't match")
+        }
+    }
+
     return (
         <>
             <div className="main">
@@ -17,12 +33,14 @@ export default function signup() {
 
                                 <TextField
                                     type='text'
-
                                     label="First Name"
                                     variant="standard"
                                     margin="normal"
                                     fullWidth
                                     required
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+
                                 />
 
                                 <TextField
@@ -32,6 +50,8 @@ export default function signup() {
                                     margin="normal"
                                     fullWidth
                                     required
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
                                 />
 
                                 <TextField
@@ -42,6 +62,8 @@ export default function signup() {
                                     fullWidth
                                     required
                                     helperText="You can use letters, numbers & periods"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
 
                                 <TextField
@@ -53,6 +75,8 @@ export default function signup() {
                                     fullWidth
                                     required
                                     helperText="Use 8 or more characters with a mix of letters, numbers & symbols"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
 
                                 <TextField
@@ -63,13 +87,15 @@ export default function signup() {
                                     margin="normal"
                                     fullWidth
                                     required
+                                    value={cPassword}
+                                    onChange={(e) => setCPassword(e.target.value)}
                                 />
 
 
 
 
 
-                                <Button type="submit" variant="contained" color="primary">
+                                <Button type="submit" variant="contained" color="primary" onClick={submit}>
                                     Submit
                                 </Button>
 
