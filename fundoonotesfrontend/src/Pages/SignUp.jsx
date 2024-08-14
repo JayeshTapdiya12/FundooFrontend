@@ -8,17 +8,67 @@ export default function SignUp() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
-    const [cPassword, setCPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [cPassword, setCPassword] = useState('');
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [passwordErrors, setPasswordErrors] = useState([]);
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
-    const submit = () => {
-        if (password === cPassword) {
-            alert(firstName, lastName, email, password)
-        } else {
-            alert("password doesn't match")
+    const validatePassword = (password) => {
+        const errors = [];
+        if (!/(?=.*[a-z])/.test(password)) {
+            errors.push("Lowercase letter missing");
         }
-    }
+        if (!/(?=.*[A-Z])/.test(password)) {
+            errors.push("Uppercase letter missing");
+        }
+        if (!/(?=.*\d)/.test(password)) {
+            errors.push("Digit missing");
+        }
+        if (!/(?=.[@$!%?&])/.test(password)) {
+            errors.push("Special character missing");
+        }
+        if (!/.{8,}/.test(password)) {
+            errors.push("Minimum 8 characters required");
+        }
+        return errors;
+    };
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        setIsEmailValid(validateEmail(value));
+    };
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        setPasswordErrors(validatePassword(value));
+    };
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        if (!isEmailValid) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (passwordErrors.length > 0) {
+            alert("Please correct the password errors.");
+            return;
+        }
+
+        if (password === cPassword) {
+            alert(`First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}, Password: ${password}`);
+        } else {
+            alert("Password doesn't match");
+        }
+    };
 
     return (
         <>
@@ -40,7 +90,6 @@ export default function SignUp() {
                                     required
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
-
                                 />
 
                                 <TextField
@@ -61,26 +110,26 @@ export default function SignUp() {
                                     margin="normal"
                                     fullWidth
                                     required
-                                    helperText="You can use letters, numbers & periods"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={handleEmailChange}
+                                    error={!isEmailValid}
+                                    helperText={isEmailValid ? "You can use letters, numbers & periods" : "Invalid email address."}
                                 />
 
                                 <TextField
-
                                     label="Password"
                                     type="password"
                                     variant="standard"
                                     margin="normal"
                                     fullWidth
                                     required
-                                    helperText="Use 8 or more characters with a mix of letters, numbers & symbols"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={handlePasswordChange}
+                                    error={passwordErrors.length > 0}
+                                    helperText={passwordErrors.join(', ')}
                                 />
 
                                 <TextField
-
                                     label="Confirm"
                                     type="password"
                                     variant="standard"
@@ -91,14 +140,9 @@ export default function SignUp() {
                                     onChange={(e) => setCPassword(e.target.value)}
                                 />
 
-
-
-
-
                                 <Button type="submit" variant="contained" color="primary" onClick={submit}>
                                     Submit
                                 </Button>
-
 
                             </Container>
                         </form>
