@@ -1,13 +1,21 @@
 import React, { useState } from 'react'
 import { Container, TextField, Button, Typography, Link, Box } from '@mui/material';
 import '../Style/login.css'
+import { login } from '../Services/UserService';
+
 
 function Login() {
 
 
+    const handleSubmit = async () => {
+        let res = await login()
+        console.log(res?.data.data)
+        localStorage.setItem("token", res?.data?.data)
+    }
+
     return (
         <>
-            <form action="">
+            <form className='login'>
                 <Container maxWidth="xs">
                     <Box textAlign="center" marginBottom={2}>
                         <Typography variant="h5" gutterBottom>
@@ -44,7 +52,7 @@ function Login() {
                     </Box>
 
 
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} >
                         login
                     </Button>
 
