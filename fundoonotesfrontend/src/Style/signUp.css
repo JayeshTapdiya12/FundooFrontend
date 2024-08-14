@@ -16,6 +16,10 @@
   display: flex;
   flex-direction: column;
 }
+.name {
+  display: flex;
+  justify-content: space-between;
+}
 
 .google {
   height: 20vw;
