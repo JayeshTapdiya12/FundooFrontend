@@ -1,15 +1,20 @@
 import React from 'react';
 import './App.css';
-import SignUp from './Pages/SignUp';
-import Login from './Pages/Login';
+
+import Router from './Routes/Router';
 
 function App() {
   return (
+
     <div className="App">
 
-      <SignUp />
-      <Login />
+      <Router />
+
+
+
     </div>
+
+
   );
 }
 
