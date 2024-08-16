@@ -15,13 +15,14 @@ export const login = (value) => {
 }
 
 export const signup = (value) => {
+
     const data = {
         name: value.name,
         lname: value.lname,
         email: value.email,
         password: value.password
     }
-    console.log(data, value)
+    // console.log(data, value)
 
     const res = axios.post(baseUrl + 'sign', data)
     console.log("signup succefully", res)
