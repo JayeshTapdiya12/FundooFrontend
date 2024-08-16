@@ -4,7 +4,8 @@ import google from '../Assests/signupPhoto.webp'
 import { Container, TextField, Button, Typography } from '@mui/material';
 import { signup } from '../Services/UserService';
 import { Link } from "react-router-dom";
-
+import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
 
 export default function SignUp() {
 
@@ -70,6 +71,20 @@ export default function SignUp() {
         }));
     };
 
+
+    const send = async () => {
+        console.log('object')
+        if (userDetails.email === "" || userDetails.password === "" || userDetails.name === "" || userDetails.lname === "") {
+            console.log("object=====>");
+            <Alert severity="error">plz enter all the details.</Alert>
+        } else {
+            console.log("hello in side ")
+            let res = await signup(userDetails);
+            console.log(res?.data.data)
+            console.log(userDetails)
+        }
+    }
+
     const submit = async (e) => {
         e.preventDefault();
 
@@ -105,14 +120,14 @@ export default function SignUp() {
         console.log(userDetails)
 
 
-        // this is giving the value of the signup to the backend
-        // if()
-        let res = await signup(userDetails);
-        console.log(res?.data.data)
-        localStorage.setItem("sign", res?.data?.data)
-        console.log(userDetails)
+
+
+        send()
 
     };
+
+
+
 
     return (
         <>
@@ -130,10 +145,14 @@ export default function SignUp() {
                                     label="First Name"
                                     variant="standard"
                                     margin="normal"
-                                    fullWidth
+                                    // fullWidth
                                     required
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
+                                    sx={{
+                                        width: 200,
+                                        maxWidth: '10vw',
+                                    }}
                                 />
 
                                 <TextField
@@ -141,7 +160,12 @@ export default function SignUp() {
                                     label="Last Name"
                                     variant="standard"
                                     margin="normal"
-                                    fullWidth
+                                    // fullWidth
+                                    sx={{
+                                        width: 200,
+                                        maxWidth: '10vw',
+                                        marginLeft: "10px"
+                                    }}
                                     required
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
@@ -165,7 +189,10 @@ export default function SignUp() {
                                     type="password"
                                     variant="standard"
                                     margin="normal"
-                                    fullWidth
+                                    sx={{
+                                        width: 200,
+                                        maxWidth: '10vw',
+                                    }}
                                     required
                                     value={password}
                                     onChange={handlePasswordChange}
@@ -178,20 +205,24 @@ export default function SignUp() {
                                     type="password"
                                     variant="standard"
                                     margin="normal"
-                                    fullWidth
+                                    sx={{
+                                        width: 200,
+                                        maxWidth: '10vw',
+                                        marginLeft: "10px"
+                                    }}
                                     required
                                     value={cPassword}
                                     onChange={(e) => setCPassword(e.target.value)}
                                 />
-
+                                <br />
                                 <Button type="submit" variant="contained" color="primary" onClick={submit}>
-                                    Submit
+                                    SignUp
                                 </Button>
 
                             </Container>
                         </form>
                         <Link to='/login'> <Button variant="text" color="primary" fullWidth>
-                            Sign in instead
+                            Sign in
                         </Button></Link>
                     </div>
                     <div className="image">
