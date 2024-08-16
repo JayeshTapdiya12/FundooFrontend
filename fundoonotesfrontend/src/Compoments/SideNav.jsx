@@ -65,7 +65,7 @@ const AppBar = styled(MuiAppBar, {
     ...(open && {
         marginLeft: drawerWidth,
         // isko band isliye kiya kyoki apn ko open mei drwawer ki width nhi chaiye thi 
-        // width: `calc(100% - ${drawerWidth}px)`,
+        // width: `calc(100% - ${drawerWidth}px)`,  
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -102,6 +102,8 @@ export default function SideNav() {
         setOpen(false);
     };
 
+
+
     return (
         <Box sx={{ display: 'flex' }} style={{ backgroundColor: "#202124" }}>
             <CssBaseline />
@@ -119,7 +121,7 @@ export default function SideNav() {
 
                         // edge="start"
                         sx={{
-                            marginRight: 5,
+                            // marginRight: 5,
                             //     ...(open && { display: 'none' }),
                         }}
                     >
@@ -141,9 +143,9 @@ export default function SideNav() {
                 </DrawerHeader>
 
 
-                <List style={{ backgroundColor: "#202124", height: "100%" }}>
+                <List style={{ backgroundColor: "#202124", height: "100%" }} >
                     {['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Bin'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white" }} >
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white", marginLeft: "10px" }} >
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
