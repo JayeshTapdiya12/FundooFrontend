@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import '../Style/signUp.css';
 import google from '../Assests/signupPhoto.webp'
-import { Container, TextField, Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { Container, TextField, Button, Typography } from '@mui/material';
+import { signup } from '../Services/UserService';
+import { Link } from "react-router-dom";
+
 
 export default function SignUp() {
 
@@ -12,6 +15,15 @@ export default function SignUp() {
     const [cPassword, setCPassword] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [passwordErrors, setPasswordErrors] = useState([]);
+
+
+    const [userDetails, setUserDetails] = useState({
+        name: "",
+        lname: "",
+        email: "",
+        password: ""
+    })
+
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,15 +54,23 @@ export default function SignUp() {
         const value = e.target.value;
         setEmail(value);
         setIsEmailValid(validateEmail(value));
+        setUserDetails(prevDetails => ({
+            ...prevDetails,
+            email: value
+        }));
     };
 
     const handlePasswordChange = (e) => {
         const value = e.target.value;
         setPassword(value);
         setPasswordErrors(validatePassword(value));
+        setUserDetails(prevDetails => ({
+            ...prevDetails,
+            password: value
+        }));
     };
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
 
         if (!isEmailValid) {
@@ -68,6 +88,30 @@ export default function SignUp() {
         } else {
             alert("Password doesn't match");
         }
+
+        // setUserDetails({
+        //     ...userDetails,
+        //     name: firstName,
+        //     lname: lastName,
+        //     // email: email,
+        //     // password: password
+        // })
+        // console.log(userDetails, firstName, lastName)
+        setUserDetails(prevDetails => ({
+            ...prevDetails,
+            name: firstName,
+            lname: lastName,
+        }));
+        console.log(userDetails)
+
+
+        // this is giving the value of the signup to the backend
+        // if()
+        let res = await signup(userDetails);
+        console.log(res?.data.data)
+        localStorage.setItem("sign", res?.data?.data)
+        console.log(userDetails)
+
     };
 
     return (
@@ -146,9 +190,9 @@ export default function SignUp() {
 
                             </Container>
                         </form>
-                        <Button variant="text" color="primary" fullWidth>
+                        <Link to='/login'> <Button variant="text" color="primary" fullWidth>
                             Sign in instead
-                        </Button>
+                        </Button></Link>
                     </div>
                     <div className="image">
                         <img src={google} alt="google img" className='google' />

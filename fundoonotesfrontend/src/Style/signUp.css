@@ -1,26 +1,115 @@
+/* signUp.css */
+
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px;
 }
 
 .content {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  width: 65%;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
 }
 
 .form {
+  flex: 1;
+  padding: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
-.name {
-  display: flex;
-  justify-content: space-between;
+
+.image {
+  display: none;
+  flex: 1;
+  background-color: #f4f4f4;
+  justify-content: center;
+  align-items: center;
 }
 
 .google {
-  height: 20vw;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+  }
+
+  .image {
+    display: flex;
+  }
+}
+
+.MuiContainer-root {
+  padding: 0 !important;
+}
+
+.MuiTypography-root {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #155bb5;
+}
+
+.MuiButton-textPrimary {
+  color: #1a73e8;
+  margin-top: 20px;
+}
+
+.MuiFormHelperText-root {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .main {
+    height: auto;
+    padding: 10px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .content {
+    box-shadow: none;
+  }
+
+  .MuiContainer-root {
+    padding: 0 10px !important;
+  }
+
+  .MuiTypography-root {
+    font-size: 1.5rem;
+  }
+
+  .MuiTextField-root {
+    margin-bottom: 12px;
+  }
+
+  .MuiButton-textPrimary {
+    font-size: 0.875rem;
+  }
 }
