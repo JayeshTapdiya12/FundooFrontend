@@ -3,7 +3,8 @@ import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { Link } from "react-router-dom";
 import '../Style/login.css'
 import { login } from '../Services/UserService';
-
+import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
 
 function Login() {
 
@@ -12,13 +13,20 @@ function Login() {
         password: ""
     });
 
+    const send = async () => {
+        if (userDetails.email === "" || userDetails.password === "") {
+            <Alert severity="error">plz enter all the details.</Alert>
+        } else {
+            let res = await login(userDetails)
+            console.log(res?.data.data)
+            localStorage.setItem("token", res?.data?.data)
+            console.log(userDetails)
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        let res = await login(userDetails)
-        console.log(res?.data.data)
-        localStorage.setItem("token", res?.data?.data)
-        console.log(userDetails)
+        send()
     }
 
     return (
@@ -73,8 +81,10 @@ function Login() {
                     <Box textAlign="center" marginTop={2}>
 
                         <Link to='/' variant="body2">
-                            <Button type="submit" variant="contained" color="primary">    Create account
-                            </Button></Link>
+                            <Button type="submit" variant="contained" color="primary">
+                                Create account
+                            </Button>
+                        </Link>
                     </Box>
                 </Container>
             </form>
