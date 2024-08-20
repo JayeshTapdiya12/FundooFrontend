@@ -6,5 +6,5 @@ export const ProtectedRoute = ({ children }) => {
     if (token && token !== "undefined") {
         return children
     }
-    return <Navigate to='/' replace />
+    return <Navigate to='/login' replace />
 }

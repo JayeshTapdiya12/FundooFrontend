@@ -18,12 +18,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import google from '../Assests/googlekeepimg.png'
 // import '../Style/header.css '
 
-
-
-
-
-
-
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,

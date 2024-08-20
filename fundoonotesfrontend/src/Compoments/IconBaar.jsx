@@ -40,10 +40,10 @@ export default function IconBaar() {
                     <Tooltip title="Colors" arrow>
                         <IconButton>
                             <ColorLensOutlinedIcon onClick={handleToggle} />
-                            {/* {isExpanded && (
+                            {isExpanded && (
                                 <div className="color-picker-container">
-                                    <ColorPicker onColorChange={handleColorChange} />
-                                </div>)} */}
+                                    <ColorPicker />
+                                </div>)}
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Ideas" arrow>

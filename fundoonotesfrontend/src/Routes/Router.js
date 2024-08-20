@@ -14,6 +14,7 @@ export default function Router() {
                     <Route path='/' exact element={<AuthRoute> <SignUp /> </AuthRoute>} />
                     <Route path='/login' element={<AuthRoute> <Login /></AuthRoute>} />
                     <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
+                    {/* add child route */}
 
                 </Routes>
             </BrowserRouter>

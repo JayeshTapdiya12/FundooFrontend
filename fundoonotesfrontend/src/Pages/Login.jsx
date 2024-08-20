@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import '../Style/login.css'
 import { login } from '../Services/UserService';
 import Alert from '@mui/material/Alert';
@@ -13,12 +13,13 @@ function Login() {
         password: ""
     });
 
+
     const send = async () => {
         if (userDetails.email === "" || userDetails.password === "") {
             <Alert severity="error">plz enter all the details.</Alert>
         } else {
             let res = await login(userDetails)
-            console.log(res?.data.data)
+            // console.log(res?.data.data)
             localStorage.setItem("token", res?.data?.data)
             console.log(userDetails)
         }
@@ -27,6 +28,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         send()
+
     }
 
     return (
@@ -75,6 +77,7 @@ function Login() {
 
 
                     <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} >
+
                         login
                     </Button>
 
