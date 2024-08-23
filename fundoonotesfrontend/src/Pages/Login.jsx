@@ -1,39 +1,46 @@
-import React, { useState } from 'react'
-import { Container, TextField, Button, Typography, Box } from '@mui/material';
-import { Link, Navigate } from "react-router-dom";
-import '../Style/login.css'
+import React, { useState } from 'react';
+import { Container, TextField, Button, Typography, Box, FormControlLabel, Checkbox } from '@mui/material';
+import { Link, useNavigate } from "react-router-dom";
+import '../Style/login.css';
 import { login } from '../Services/UserService';
 import Alert from '@mui/material/Alert';
-// import Stack from '@mui/material/Stack';
 
 function Login() {
-
     const [userDetails, setUserDetails] = useState({
         email: "",
         password: ""
     });
 
+    const [alert, setAlert] = useState(null);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const send = async () => {
         if (userDetails.email === "" || userDetails.password === "") {
-            <Alert severity="error">plz enter all the details.</Alert>
+            setAlert(<Alert severity="error">Please enter all the details.</Alert>);
         } else {
-            let res = await login(userDetails)
-            // console.log(res?.data.data)
-            localStorage.setItem("token", res?.data?.data)
-            console.log(userDetails)
+            try {
+                let res = await login(userDetails);
+                localStorage.setItem("token", res?.data?.data);
+                navigate('/dashboard');
+            } catch (error) {
+                setAlert(<Alert severity="error">Login failed. Please try again.</Alert>);
+            }
         }
-    }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        send()
+        await send();
+    };
 
-    }
+    const handleShowPasswordChange = (e) => {
+        setShowPassword(e.target.checked);
+    };
 
     return (
-        <>
-            <form className='login'>
+        <Box className='login-container'>
+            <form className='login' onSubmit={handleSubmit}>
                 <Container maxWidth="xs">
                     <Box textAlign="center" marginBottom={2}>
                         <Typography variant="h5" gutterBottom>
@@ -44,6 +51,12 @@ function Login() {
                         </Typography>
                     </Box>
 
+                    {alert && (
+                        <Box marginBottom={2}>
+                            {alert}
+                        </Box>
+                    )}
+
                     <TextField
                         type='email'
                         label="Email or phone"
@@ -53,46 +66,58 @@ function Login() {
                         required
                         name="email"
                         value={userDetails.email}
-                        onChange={(e) => { setUserDetails({ ...userDetails, [e.target.name]: e.target.value }) }}
+                        onChange={(e) => setUserDetails({ ...userDetails, [e.target.name]: e.target.value })}
                     />
 
                     <TextField
-
                         label="Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"} // Toggle password visibility
                         variant="outlined"
                         margin="normal"
                         fullWidth
                         required
                         name="password"
                         value={userDetails.password}
-                        onChange={(e) => { setUserDetails({ ...userDetails, [e.target.name]: e.target.value }) }}
+                        onChange={(e) => setUserDetails({ ...userDetails, [e.target.name]: e.target.value })}
+                        InputProps={{
+                            endAdornment: (
+                                <Box display="flex" alignItems="center">
+
+                                </Box>
+                            )
+                        }}
                     />
 
-                    <Box textAlign="right" marginBottom={2}>
+                    <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom={2}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={showPassword}
+                                    onChange={handleShowPasswordChange}
+                                />
+                            }
+                            label="Show password"
+                        />
                         <Link href="#" variant="body2">
                             Forgot Password?
                         </Link>
                     </Box>
 
-
-                    <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} >
-
-                        login
+                    <Button type="submit" variant="contained" color="primary">
+                        Login
                     </Button>
 
                     <Box textAlign="center" marginTop={2}>
-
-                        <Link to='/' variant="body2">
-                            <Button type="submit" variant="contained" color="primary">
+                        <Link to='/' style={{ textDecoration: 'none' }}>
+                            <Button variant="contained" color="primary">
                                 Create account
                             </Button>
                         </Link>
                     </Box>
                 </Container>
             </form>
-        </>
-    )
+        </Box>
+    );
 }
 
 export default Login;
