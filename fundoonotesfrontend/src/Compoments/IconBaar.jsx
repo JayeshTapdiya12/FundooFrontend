@@ -5,8 +5,8 @@ import Tooltip from '@mui/material/Tooltip';
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
 import GroupAddIcon from '@mui/icons-material/GroupAddOutlined';
 import LightbulbIcon from '@mui/icons-material/LightbulbOutlined';
-import ImageIcon from '@mui/icons-material/ImageOutlined';
-import CalendarTodayIcon from '@mui/icons-material/CalendarTodayOutlined';
+// import ImageIcon from '@mui/icons-material/ImageOutlined';
+import CalendarTodayIcon from '@mui/icons-material/ArchiveOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVertOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForwardOutlined'
@@ -51,18 +51,13 @@ export default function IconBaar() {
                             <LightbulbIcon />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Insert Image" arrow>
-                        <IconButton>
-                            <ImageIcon />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Calendar" arrow>
+
+                    <Tooltip title="Archive" arrow>
                         <IconButton>
                             <CalendarTodayIcon />
                         </IconButton>
                     </Tooltip>
-                </div>
-                <div className="icon-group">
+
                     <Tooltip title="More Options" arrow>
                         <IconButton>
                             <MoreVertIcon />
@@ -78,7 +73,7 @@ export default function IconBaar() {
                             <ArrowForwardIcon />
                         </IconButton>
                     </Tooltip>
-                    <br />
+                    {/* <br /> */}
 
 
                 </div>
