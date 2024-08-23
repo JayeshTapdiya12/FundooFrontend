@@ -6,6 +6,10 @@ export default function SingleNote({ note }) {
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
+
+
+
+
     const handleMouseEnter = (index) => {
         setHoveredIndex(index);
     };
