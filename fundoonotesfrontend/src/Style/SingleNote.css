@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 16px;
   padding: 16px;
-  margin-left: 10vw;
+  margin-left: 6vw;
 }
 
 /* Individual card styling */
@@ -20,6 +20,7 @@
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  border: 1px solid white;
 }
 
 /* Ensure the content grows to fill the space, pushing the button to the bottom */
@@ -49,7 +50,6 @@
 
 /* Button styling */
 .card button {
-  /* background-color: #007bff; */
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -67,13 +67,13 @@
 /* Responsive design adjustments */
 @media (min-width: 600px) {
   .card {
-    width: calc(50% - 16px);
+    width: calc(50% - 16px); /* Two cards per row on medium screens */
   }
 }
 
 @media (min-width: 900px) {
   .card {
-    width: calc(33.33% - 16px);
+    width: calc(33.33% - 16px); /* Three cards per row on large screens */
   }
 }
 
@@ -84,16 +84,30 @@
   }
 
   .card {
-    width: 90%;
+    width: 90%; /* Make cards take up 90% of the width on small screens */
   }
 }
 
 @media (max-width: 480px) {
+  .card-container {
+    padding: 8px; /* Reduce padding on very small screens */
+  }
+
+  .card {
+    width: 100%; /* Make cards take up the full width on very small screens */
+    margin-bottom: 16px; /* Add margin to separate stacked cards */
+  }
+
   .card h2 {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Smaller font size for titles */
   }
 
   .card p {
+    font-size: 0.9rem; /* Smaller font size for descriptions */
+  }
+
+  .card button {
+    padding: 0.4rem 0.8rem; /* Slightly smaller buttons */
     font-size: 0.9rem;
   }
 }
