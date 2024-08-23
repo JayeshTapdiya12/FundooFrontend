@@ -16,9 +16,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
+import LabelOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from './Header';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
+import { Link } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -102,8 +107,22 @@ export default function SideNav() {
         setOpen(false);
     };
 
+    const icons = [
+        <LightbulbOutlinedIcon />,
+        <NotificationsNoneOutlinedIcon />,
+        <LabelOutlinedIcon />,
+        <ArchiveOutlinedIcon />,
+        <DeleteOutlineOutlinedIcon />
+    ];
 
+    const link = [
+        '/dashboard',
+        '/dashboard/reminder',
+        '/dashboard/editlables',
+        '/dashboard/archive',
+        '/dashboard/trash',
 
+    ]
     return (
         <Box sx={{ display: 'flex' }} style={{ backgroundColor: "#202124" }}>
             <CssBaseline />
@@ -135,43 +154,39 @@ export default function SideNav() {
 
             <Drawer variant="permanent" open={open} >
                 <DrawerHeader style={{ backgroundColor: "#202124" }}>
-                    {/* <IconButton onClick={handleDrawerClose}> */}
-                    {/* {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />} */}
-                    {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
-                    {/* <MenuIcon /> */}
-                    {/* </IconButton> */}
+
                 </DrawerHeader>
 
 
                 <List style={{ backgroundColor: "#202124", height: "100%" }} >
                     {['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Bin'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white", marginLeft: "10px" }} >
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
+                        <Link to={link[index]}>
+                            <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white", marginLeft: "10px" }} >
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
+                                        minHeight: 48,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        px: 2.5,
                                     }}
-                                    style={{ color: "white" }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                        style={{ color: "white" }}
+                                    >
 
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
+                                        {icons[index]}
+                                    </ListItemIcon>
 
+                                    <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                     ))}
-                    <div style={{ position: "relative", bottom: "0px", backgroundColor: "#202124", color: 'white' }}>
-                        {!open ? '' : "Open-source licences"}
-                    </div>
+
                 </List>
 
 
