@@ -9,29 +9,32 @@ export default function Dashboard() {
 
     const [note, setNote] = useState([])
 
+    const [noteCreated, setNoteCreated] = useState(false)
+
     const getNotes = async () => {
         try {
             const res = await allnote();
             const data1 = res?.data?.data || [];
             setNote(data1);
+            setNoteCreated(false)
         } catch (error) {
             console.error("Failed to fetch notes:", error);
-            setNote([]); // Fallback to an empty array in case of an error
+            setNote([]);
         }
     }
     console.log(note)
     useEffect(() => {
         getNotes();
-    }, [])
+    }, [noteCreated])
 
 
     return (
 
         <>
-            <div style={{ backgroundColor: "#202124", height: '100vh', minHeight: '100vh' }} >
+            <div className="dashboard-container">
                 <SideNav />
                 <div className="search">
-                    <InputNote />
+                    <InputNote setNoteCreated={setNoteCreated} />
                 </div>
                 <div className="singlenote">
                     <SingleNote note={note} />
