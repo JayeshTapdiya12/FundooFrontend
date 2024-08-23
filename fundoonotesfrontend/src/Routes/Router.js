@@ -13,9 +13,13 @@ export default function Router() {
 
                     <Route path='/' exact element={<AuthRoute> <SignUp /> </AuthRoute>} />
                     <Route path='/login' element={<AuthRoute> <Login /></AuthRoute>} />
-                    <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
-                    {/* add child route */}
+                    <Route path='/dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} >
+                        <Route path='reminder' element={<ProtectedRoute></ProtectedRoute>} />
+                        <Route path='archive' element={<ProtectedRoute></ProtectedRoute>} />
+                        <Route path='editlables' element={<ProtectedRoute></ProtectedRoute>} />
+                        <Route path='trash' element={<ProtectedRoute></ProtectedRoute>} />
 
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </>
