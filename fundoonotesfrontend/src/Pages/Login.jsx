@@ -39,7 +39,12 @@ function Login() {
     };
 
     return (
-        <Box className='login-container'>
+        <Box className='login-container' component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 1 },
+            }}
+            noValidate
+            autoComplete="off">
             <form className='login' onSubmit={handleSubmit}>
                 <Container maxWidth="xs">
                     <Box textAlign="center" marginBottom={2}>
@@ -58,6 +63,8 @@ function Login() {
                     )}
 
                     <TextField
+
+
                         type='email'
                         label="Email or phone"
                         variant="outlined"
@@ -67,6 +74,7 @@ function Login() {
                         name="email"
                         value={userDetails.email}
                         onChange={(e) => setUserDetails({ ...userDetails, [e.target.name]: e.target.value })}
+
                     />
 
                     <TextField
@@ -103,13 +111,14 @@ function Login() {
                         </Link>
                     </Box>
 
-                    <Button type="submit" variant="contained" color="primary">
-                        Login
-                    </Button>
+
 
                     <Box textAlign="center" marginTop={2}>
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color="primary">
+                        <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
+                            Login
+                        </Button>
+                        <Link to='/' style={{ textDecoration: 'none', backgroundColor: "white", color: "blue" }}>
+                            <Button variant="standard" color="primary">
                                 Create account
                             </Button>
                         </Link>
