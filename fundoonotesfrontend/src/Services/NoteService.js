@@ -15,11 +15,7 @@ export const allnote = async () => {
 
 export const createNote = async (data) => {
     console.log(data)
-    // // const token = localStorage.getItem("token");
-    // // const header = { headers: { 'Authorization': 'bearer ' + token } }
-    // const res = axios.post(baseUrl, header, data);
-    // console.log(res);
-    // return res
+
     try {
         const token = localStorage.getItem("token");
         const header = { headers: { 'Authorization': 'bearer ' + token } }
@@ -29,5 +25,38 @@ export const createNote = async (data) => {
 
     } catch (error) {
         console.error("Error creating note:", error);
+    }
+}
+
+
+export const archiveNote = async (id) => {
+    try {
+        const token = localStorage.getItem("token");
+        const headers = { headers: { 'Authorization': "bearer " + token } };
+        const url = `${baseUrl}/${id}/archived`;
+        const res = await axios.post(url, null, headers);
+        return res;
+    } catch (error) {
+        console.error("Failed to archive note:", error);
+
+
+    }
+}
+
+
+export const trashNote = async (id) => {
+    if (id) {
+        try {
+            const token = localStorage.getItem("token");
+            const headers = { headers: { 'Authorization': "bearer " + token } };
+            const url = `${baseUrl}/${id}/trash`;
+            const res = await axios.post(url, null, headers);
+            return res;
+
+        } catch (error) {
+            console.log("error in the trash note=========>", error)
+        }
+    } else {
+        console.log("id not found=====>")
     }
 }
