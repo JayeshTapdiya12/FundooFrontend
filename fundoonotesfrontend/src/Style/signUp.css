@@ -40,7 +40,6 @@
   object-fit: contain;
 }
 
-/* Responsive Styles */
 @media (min-width: 768px) {
   .content {
     flex-direction: row;
@@ -59,7 +58,6 @@
   }
 }
 
-/* Adjustments for Smaller Screens */
 @media (max-width: 767px) {
   .main {
     padding: 10px;
@@ -78,7 +76,6 @@
     max-width: 200px;
   }
 
-  /* Stack fields vertically */
   .field-group {
     flex-direction: column;
   }

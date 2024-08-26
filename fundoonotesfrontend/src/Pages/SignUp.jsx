@@ -161,12 +161,15 @@ export default function SignUp() {
                                 />
                                 <TextField
                                     label="Confirm"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     variant="standard"
                                     margin="normal"
                                     required
                                     value={cPassword}
-                                    onChange={(e) => setCPassword(e.target.value)}
+                                    onChange={(e) => {
+                                        setCPassword(e.target.value);
+                                        handlePasswordChange(e);
+                                    }}
                                 />
                             </Box>
 
@@ -178,14 +181,14 @@ export default function SignUp() {
                                     />
                                 }
                                 label="Show password"
-                                style={{ marginLeft: '10px' }}
                             />
 
-                            <Button type="submit" variant="contained" color="primary">
-                                Sign Up
-                            </Button>
+
 
                             <Box textAlign="center" marginTop={2}>
+                                <Button type="submit" variant="contained" color="primary">
+                                    Sign Up
+                                </Button>
                                 <Link to='/login' style={{ textDecoration: 'none' }}>
                                     <Button variant="text" color="primary">
                                         Sign in
