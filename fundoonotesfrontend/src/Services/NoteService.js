@@ -60,3 +60,21 @@ export const trashNote = async (id) => {
         console.log("id not found=====>")
     }
 }
+
+
+export const editNote = async (id, data) => {
+    if (id) {
+        try {
+            const token = localStorage.getItem('token');
+            const headers = { headers: { 'Authorization': 'bearer ' + token } };
+            const url = `${baseUrl}/${id}`;
+            const res = await axios.put(url, data, headers);
+            return res;
+        } catch (error) {
+            console.log("error in editing the note=========>", error)
+        }
+    } else {
+        console.log("id not found=====>")
+    }
+
+}
