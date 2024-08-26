@@ -9,10 +9,13 @@ import { createNote } from '../Services/NoteService';
 export default function InputNote({ setNoteCreated }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
+    // for icon bar 
+    const [icon, setIcon] = useState(1)
 
     const [data, setData] = useState({
         title: "",
-        description: ""
+        description: "",
+        color: ""
 
     })
 
@@ -27,14 +30,17 @@ export default function InputNote({ setNoteCreated }) {
             if (data.title !== "" || data.description !== "") {
                 const res = await createNote(data);
                 console.log(res);
-                setNoteCreated(true)
+                setNoteCreated(true);
+            } else {
+                console.log("Both title and description are empty, not sending the note.");
             }
         } catch (error) {
-            console.error("Error creating note:", error);
+            console.error("An error occurred:", error);
         }
     }
 
     const handleToggle = () => {
+
 
         if (data.title === "" && data.description === "") {
             setIsExpanded(false);
@@ -43,7 +49,8 @@ export default function InputNote({ setNoteCreated }) {
             setIsExpanded(false);
             setData({
                 title: "",
-                description: ""
+                description: "",
+                color: ''
             })
         }
 
@@ -69,7 +76,7 @@ export default function InputNote({ setNoteCreated }) {
                 </div>
                 {isExpanded && (
                     <div className="note-footer">
-                        <IconBaar />
+                        <IconBaar setIcon={icon} />
                         <span className="close-btn" onClick={handleToggle}>Close</span>
                     </div>
                 )}
