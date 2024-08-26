@@ -1,111 +1,68 @@
-/* Center the login container on the page */
-.login {
+/* login.css */
+
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  background-color: #f4f4f4;
+  height: 100vh;
+  background-color: #f5f5f5;
+  padding: 0 20px;
 }
 
-/* Style the login container */
 .login {
-  margin-top: 5%;
-  margin-left: 30%;
-  background-color: white;
-  padding: 40px 30px;
+  border: 1px solid #dcdcdc;
   border-radius: 8px;
-  border: 1px solid #070505;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+  width: 100%;
   max-width: 400px;
-  width: 100%;
 }
 
-/* Style the title and subtitle */
-.login .MuiTypography-h5 {
+.MuiTypography-h5 {
   font-weight: bold;
-  text-align: center;
-  margin-bottom: 8px;
-  color: #202124;
+  margin-bottom: 16px;
 }
 
-.login .MuiTypography-subtitle1 {
-  text-align: center;
+.MuiTypography-subtitle1 {
+  color: #757575;
   margin-bottom: 24px;
-  color: #5f6368;
 }
 
-/* Style the input fields */
-.login .MuiTextField-root {
+.MuiTextField-root {
   margin-bottom: 16px;
 }
 
-.login .MuiOutlinedInput-root {
-  border-radius: 4px;
-}
-
-/* Style the link */
-.login .MuiLink-root {
-  color: #1a73e8;
-  margin-bottom: 16px;
-  display: inline-block;
-  text-decoration: none;
-  text-align: right;
-}
-
-.login .MuiLink-root:hover {
-  text-decoration: underline;
-}
-
-/* Style the submit button */
-.login .MuiButton-root {
-  background-color: #1a73e8;
-  color: white;
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  text-transform: none;
-  font-size: 1rem;
-  margin-top: 16px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.login .MuiButton-root:hover {
-  background-color: #155bb5;
-}
-
-/* Style the create account link */
-.login .create-account {
-  text-align: center;
+.MuiButton-root {
   margin-top: 16px;
 }
 
-.login .create-account .MuiLink-root {
-  color: #1a73e8;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .login {
-    height: auto;
-    padding: 20px;
+@media (max-width: 600px) {
+  .login-container {
+    padding: 0 10px;
   }
 
   .login {
-    padding: 20px;
-    box-shadow: none;
-    border: 1px solid #ddd;
+    padding: 16px;
   }
 
-  .login .MuiTypography-h5 {
-    font-size: 1.25rem;
+  .MuiTypography-h5 {
+    font-size: 1.5rem;
   }
 
-  .login .MuiTypography-subtitle1 {
-    font-size: 1rem;
-  }
-
-  .login .MuiButton-root {
+  .MuiTypography-subtitle1 {
     font-size: 0.875rem;
-    padding: 8px;
+  }
+
+  .MuiTextField-root {
+    margin-bottom: 12px;
+  }
+
+  .MuiButton-root {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .MuiFormControlLabel-root {
+    margin-left: 0;
   }
 }
