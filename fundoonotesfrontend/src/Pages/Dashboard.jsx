@@ -8,8 +8,13 @@ import SingleNote from '../Compoments/SingleNote'
 export default function Dashboard() {
 
     const [note, setNote] = useState([])
-
+    const [tabs, setTabs] = useState(1)
     const [noteCreated, setNoteCreated] = useState(false)
+    const [filter, setFilter] = useState();
+
+
+    // icons ke liye
+
 
     const getNotes = async () => {
         try {
@@ -22,22 +27,43 @@ export default function Dashboard() {
             setNote([]);
         }
     }
-    console.log(note)
+    // console.log(note)
     useEffect(() => {
         getNotes();
     }, [noteCreated])
 
 
+
+    const filteredData = note.filter(item => {
+        if (tabs === 1 && item.isDeleted === false && item.isArchived === false) {
+            // console.log(item)
+            return item
+        } else if (tabs === 4 && item.isArchived === true) {
+            // console.log(item)
+            return item
+        } else if (tabs === 5 && item.isDeleted === true) {
+            // console.log(item)
+            return item
+        }
+
+    });
+    const tab = (value) => {
+        setTabs(value)
+    }
+
     return (
 
         <>
             <div className="dashboard-container">
-                <SideNav />
-                <div className="search">
+                <SideNav tab={tab} />
+
+                {tabs === 1 ? <div className="search">
                     <InputNote setNoteCreated={setNoteCreated} />
-                </div>
+                </div> : <div style={{ marginTop: "5vw" }}></div>}
+
+
                 <div className="singlenote">
-                    <SingleNote note={note} />
+                    <SingleNote note={filteredData} tabV={tabs} />
                 </div>
             </div>
 
