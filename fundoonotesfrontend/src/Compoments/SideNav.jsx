@@ -95,7 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function SideNav() {
+export default function SideNav({ tab }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -117,12 +117,17 @@ export default function SideNav() {
 
     const link = [
         '/dashboard',
-        '/dashboard/reminder',
-        '/dashboard/editlables',
-        '/dashboard/archive',
-        '/dashboard/trash',
+        '/dashboard#reminder',
+        '/dashboard#editlables',
+        '/dashboard#archive',
+        '/dashboard#trash',
 
     ]
+    const tabs = [1, 2, 3, 4, 5];
+
+    const handleChange = (value) => {
+        tab(value)
+    }
     return (
         <Box sx={{ display: 'flex' }} style={{ backgroundColor: "#202124" }}>
             <CssBaseline />
@@ -159,8 +164,8 @@ export default function SideNav() {
 
 
                 <List style={{ backgroundColor: "#202124", height: "100%" }} >
-                    {['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Bin'].map((text, index) => (
-                        <Link to={link[index]}>
+                    {['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Trash'].map((text, index) => (
+                        <Link to={link[index]} onClick={() => handleChange(tabs[index])}>
                             <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white", marginLeft: "10px" }} >
                                 <ListItemButton
                                     sx={{
