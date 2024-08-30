@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVertOutlined';
 import { useParams } from 'react-router-dom';
 import { trashNote } from '../Services/NoteService';
 
-export default function BasicMenu() {
+export default function BasicMenu({ setNoteCreated }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -19,7 +19,7 @@ export default function BasicMenu() {
     };
     const { id } = useParams();
 
-    const delte = async () => {
+    const trash = async () => {
         if (id) {
             console.log(id)
             try {
@@ -27,6 +27,7 @@ export default function BasicMenu() {
                 console.log("trashed the note", res);
                 handleClose();
                 // return res;
+                setNoteCreated(true)
             } catch (error) {
                 console.log("Falied to Trash the NOTE ", id)
             }
@@ -57,7 +58,7 @@ export default function BasicMenu() {
                 }}
 
             >
-                <MenuItem onClick={delte}>Delete Note</MenuItem>
+                <MenuItem onClick={trash}>Delete Note</MenuItem>
                 <MenuItem onClick={handleClose}>Add Label</MenuItem>
                 <MenuItem onClick={handleClose}>Add Drawing</MenuItem>
             </Menu>

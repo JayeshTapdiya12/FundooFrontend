@@ -2,32 +2,28 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../Style/popNote.css';
 import { editNote } from '../Services/NoteService';
-
-export default function PopNote({ onClose }) {
+import InputNote from '../Compoments/InputNote'
+export default function PopNote({ onClose, setNoteCreated, noteCreated }) {
 
     const { id } = useParams();
     console.log("id form pop note==============>", id)
 
-    const [data, setData] = useState({
-        title: "",
-        description: "",
-        color: ""
-    })
+    // const [data, setData] = useState({
+    //     title: "",
+    //     description: "",
+    //     color: ""
+    // })
+
+    const [edit, setedit] = useState(true);
 
 
-
-    const edit = async () => {
-        try {
-            const res = await editNote(id, data)
-        } catch (error) {
-            console.log("error in popNOte=====>", error)
-        }
-    }
 
 
 
     const close = () => {
+        console.log(close);
         onClose(true)
+        console.log(close)
     }
 
     return (
@@ -35,8 +31,9 @@ export default function PopNote({ onClose }) {
             <div className="modal-overlay">
                 <div className="modal-content">
                     <h2>Note Details</h2>
+                    <InputNote editn={edit} close={close} setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
 
-                    <button onClick={close}>Close</button>
+                    {/* <button onClick={close}>Close</button> */}
                 </div>
             </div>
         </>

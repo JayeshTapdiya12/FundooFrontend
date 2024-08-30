@@ -60,21 +60,62 @@ export const trashNote = async (id) => {
         console.log("id not found=====>")
     }
 }
-
+export const findNote = async (id) => {
+    if (id) {
+        const token = localStorage.getItem('token');
+        const headers = { headers: { 'Authorization': 'bearer ' + token } };
+        const url = `${baseUrl}/${id}`;
+        const res = await axios.get(url, headers);
+        return res;
+    }
+}
 
 export const editNote = async (id, data) => {
-    if (id) {
+
+    if (!id) {
+        console.log("id not found=====>");
+        return null;
+    }
+
+    if (!data) {
+        console.log("No data provided to edit the note=====>");
+        return null;
+    }
+
+    if (id && data) {
         try {
             const token = localStorage.getItem('token');
+
             const headers = { headers: { 'Authorization': 'bearer ' + token } };
             const url = `${baseUrl}/${id}`;
             const res = await axios.put(url, data, headers);
             return res;
         } catch (error) {
-            console.log("error in editing the note=========>", error)
+            console.log("error in editing the note=========> innservice", error)
         }
     } else {
         console.log("id not found=====>")
     }
 
+}
+
+
+
+
+export const deleteNote = async (id) => {
+    if (id) {
+        try {
+            console.log("id in service========>", id)
+            const token = localStorage.getItem('token');
+            const headers = { headers: { 'Authorization': 'bearer ' + token } }
+            console.log("hearders======>", headers)
+            const url = `${baseUrl}/${id}`;
+            const res = await axios.delete(url, headers);
+            return res;
+        } catch (error) {
+            console.log("error in delte note in service========>", error)
+        }
+    } else {
+        console.log("id not found=====>")
+    }
 }

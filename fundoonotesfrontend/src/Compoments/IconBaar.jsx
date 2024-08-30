@@ -11,15 +11,18 @@ import ColorLensOutlinedIcon from '@mui/icons-material/ColorLensOutlined';
 import '../Style/IconBar.css';
 import ColorPicker from './ColorPicker';
 import { useParams } from 'react-router-dom';
-import { archiveNote } from '../Services/NoteService';
+import { archiveNote, deleteNote, trashNote } from '../Services/NoteService';
 import BasicMenu from './Menu';
+import UnarchiveIcon from '@mui/icons-material/UnarchiveOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 
-export default function IconBaar({ setIcon, tabV }) {
+export default function IconBaar({ setIcon, tabV, setNoteCreated }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [more, setMore] = useState(false);
 
     const { id } = useParams();
-    console.log('id in icon barr========>', id)
+    // console.log('id in icon barr========>', id)
 
     const handleToggle = () => {
         setIsExpanded(!isExpanded);
@@ -30,8 +33,8 @@ export default function IconBaar({ setIcon, tabV }) {
     };
 
     const [icons, setIcons] = useState(setIcon);
-    console.log("values of icon============>", icons, setIcon)
-    console.log("values of tabs ====>", tabV)
+    // console.log("values of icon============>", icons, setIcon)
+    // console.log("values of tabs ====>", tabV)
 
     const archi = async () => {
         if (id) {
@@ -39,6 +42,7 @@ export default function IconBaar({ setIcon, tabV }) {
             try {
                 const res = await archiveNote(id);
                 console.log('Note archived:', res);
+                setNoteCreated(true)
             } catch (error) {
                 console.error('Failed to archive note:', error);
             }
@@ -46,6 +50,38 @@ export default function IconBaar({ setIcon, tabV }) {
             console.error('No id found in params');
         }
     };
+
+    const trash = async () => {
+        if (id) {
+            console.log(id)
+            try {
+                const res = await trashNote(id);
+                console.log("trashed the note", res);
+                setNoteCreated(true)
+                // handleClose();
+                // return res;
+            } catch (error) {
+                console.log("Falied to Trash the NOTE ", id)
+            }
+        } else {
+            console.error('No id found in params');
+        }
+    }
+
+    const deleteF = async () => {
+        if (id) {
+            try {
+                const res = await deleteNote(id);
+                console.log("note delete =>", res)
+                setNoteCreated(true)
+
+            } catch (error) {
+                console.log("Falied to Delete Forever the NOTE ", id)
+            }
+        } else {
+            console.log("id not found in the iconbar==>")
+        }
+    }
 
     const renderIcons = () => {
         switch (true) {
@@ -77,7 +113,7 @@ export default function IconBaar({ setIcon, tabV }) {
                                 <LightbulbIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Archive" arrow>
+                        <Tooltip title="Archive" arrow >
                             <IconButton onClick={archi}>
                                 <ArchiveOutlined />
                             </IconButton>
@@ -85,7 +121,7 @@ export default function IconBaar({ setIcon, tabV }) {
                         <Tooltip title="More Options" arrow>
                             <IconButton onClick={handleToggle2}>
                                 <div className="div">
-                                    <BasicMenu />
+                                    <BasicMenu setNoteCreated={setNoteCreated} />
                                 </div>
                             </IconButton>
                         </Tooltip>
@@ -151,11 +187,9 @@ export default function IconBaar({ setIcon, tabV }) {
                             <ArchiveOutlined />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="More Options" arrow>
-                        <IconButton onClick={handleToggle2}>
-                            <div className="div">
-                                <BasicMenu />
-                            </div>
+                    <Tooltip title="Un Archive" arrow>
+                        <IconButton onClick={archi}>
+                            <UnarchiveIcon />
                         </IconButton>
                     </Tooltip>
                 </>
@@ -163,16 +197,14 @@ export default function IconBaar({ setIcon, tabV }) {
             // delte
             case tabV === 5:
                 return (<>
-                    <Tooltip title="Archive" arrow>
-                        <IconButton onClick={archi}>
-                            <ArchiveOutlined />
+                    <Tooltip title="Trash" arrow>
+                        <IconButton onClick={trash}>
+                            <RestoreFromTrashOutlinedIcon />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="More Options" arrow>
-                        <IconButton onClick={handleToggle2}>
-                            <div className="div">
-                                <BasicMenu />
-                            </div>
+                    <Tooltip title="Delete Forever" arrow>
+                        <IconButton onClick={deleteF}>
+                            <DeleteForeverOutlinedIcon />
                         </IconButton>
                     </Tooltip>
                 </>

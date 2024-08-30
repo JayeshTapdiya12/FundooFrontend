@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import '../Style/ColorPicker.css'; // Assuming the CSS is in the same directory
 
 const colors = [
-    '#F28B82', '#F28C81', '#F28D80', '#F28E7F', '#F28F7E',
-    '#F2907D', '#F2917C', '#F2927B', '#F2937A', '#F29479',
-    '#F29578', '#F29677', '#F29776', '#F29875'
+    '#000', '#a53265', '#b65483', '#a1b6c9', '#123456',
+    '#678910', '#135910', '#F2927B', '#246810', '#987654',
+    '#654321', '#F29677', '#456321', '#987123'
 ];
 
 export default function ColorPicker() {
