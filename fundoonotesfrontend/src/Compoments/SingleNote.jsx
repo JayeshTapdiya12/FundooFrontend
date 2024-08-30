@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconBaar from './IconBaar';
 import '../Style/SingleNote.css';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import PopNote from './PopNote';
+import { findNote } from '../Services/NoteService';
 
-export default function SingleNote({ note, tabV }) {
+export default function SingleNote({ note, tabV, setNoteCreated, noteCreated }) {
 
     const navigate = useNavigate();
     const { id } = useParams()
@@ -17,34 +18,55 @@ export default function SingleNote({ note, tabV }) {
     const [icon, setIcon] = useState(2)
 
 
+    const [data, setData] = useState({
+        title: '',
+        description: '',
+        color: ''
+    })
+
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = () => setIsModalOpen(true);
+
+
+    // const find = async () => {
+    //     const res = await findNote(id);
+    //     const data1 = res?.data?.data;
+    //     setData({
+    //         title: data1.title,
+    //         description: data1.description,
+    //         color: data1.color
+    //     })
+    // }
+
+
+    const openModal = () => {
+        setIsModalOpen(true);
+        // find()
+    }
     const closeModal = () => setIsModalOpen(false);
 
     return (
         <div className="card-container">
             {note.map((ele) => (
                 <NavLink NavLink
-                    to={`/dashboard/note/${ele._id}`} key={ele._id} onClick={openModal} >
+                    to={`/dashboard/note/${ele._id}`} key={ele._id}  >
 
-                    <div className="card ,icon-bar-overlay"
+                    <div className="card ,icon-bar-overlay" onClick={openModal}
                         onMouseEnter={() => handleMouseEnter(ele._id)}
-                        onMouseLeave={handleMouseLeave}>
+                    >
                         <h2>{ele.title}</h2>
                         <p>{ele.description}</p>
-                        <div
 
-                        >
-                            {hoveredIndex === ele._id && (
-                                <div className="icon-baar-container">
-                                    <IconBaar noteId={ele._id} setIcon={icon} tabV={tabV} />
-                                </div>
-                            )}
-                        </div>
+                    </div>
+                    <div>
+                        {hoveredIndex === ele._id && (
+                            <div className="icon-baar-container" onMouseLeave={handleMouseLeave}>
+                                <IconBaar noteId={ele._id} setIcon={icon} tabV={tabV} setNoteCreated={setNoteCreated} />
+                            </div>
+                        )}
                     </div>
                 </NavLink>
             ))}
-            {isModalOpen && <PopNote onClose={closeModal} />}
+            {isModalOpen && <PopNote onClose={closeModal} setNoteCreated={setNoteCreated} noteCreated={noteCreated} />}
 
         </div>
     );
