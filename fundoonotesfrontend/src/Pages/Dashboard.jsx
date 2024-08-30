@@ -58,12 +58,12 @@ export default function Dashboard() {
                 <SideNav tab={tab} />
 
                 {tabs === 1 ? <div className="search">
-                    <InputNote setNoteCreated={setNoteCreated} />
+                    <InputNote setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
                 </div> : <div style={{ marginTop: "5vw" }}></div>}
 
 
                 <div className="singlenote">
-                    <SingleNote note={filteredData} tabV={tabs} />
+                    <SingleNote note={filteredData} tabV={tabs} setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
                 </div>
             </div>
 
