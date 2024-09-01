@@ -50,12 +50,20 @@ export default function Dashboard() {
     const tab = (value) => {
         setTabs(value)
     }
+    const [isGrid, setIsGrid] = useState(true);
+    const view = (value) => {
+        setIsGrid(value);
+        console.log(value)
+
+    }
+    console.log(isGrid)
+
 
     return (
 
         <>
             <div className="dashboard-container">
-                <SideNav tab={tab} />
+                <SideNav tab={tab} view={view} />
 
                 {tabs === 1 ? <div className="search">
                     <InputNote setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
@@ -63,7 +71,7 @@ export default function Dashboard() {
 
 
                 <div className="singlenote">
-                    <SingleNote note={filteredData} tabV={tabs} setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
+                    <SingleNote note={filteredData} tabV={tabs} setNoteCreated={setNoteCreated} noteCreated={noteCreated} isGrid={isGrid} />
                 </div>
             </div>
 
