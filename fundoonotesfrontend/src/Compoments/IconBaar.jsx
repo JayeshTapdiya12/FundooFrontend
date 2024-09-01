@@ -184,14 +184,10 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated }) {
                 return (<>
                     <Tooltip title="Archive" arrow>
                         <IconButton onClick={archi}>
-                            <ArchiveOutlined />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Un Archive" arrow>
-                        <IconButton onClick={archi}>
                             <UnarchiveIcon />
                         </IconButton>
                     </Tooltip>
+
                 </>
                 );
             // delte
