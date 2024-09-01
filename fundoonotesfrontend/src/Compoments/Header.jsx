@@ -17,6 +17,8 @@ import google from '../Assests/googlekeepimg.png'
 import { useNavigate } from 'react-router-dom';
 // import '../Style/header.css '
 import Button from '@mui/material/Button';
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import ViewStreamOutlinedIcon from '@mui/icons-material/ViewStreamOutlined';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -61,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-export default function Header() {
+export default function Header({ handleView }) {
 
 
     const navigate = useNavigate();
@@ -71,6 +73,16 @@ export default function Header() {
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+
+
+    const [gird, setGrid] = React.useState(true)
+    const view = () => {
+        setGrid(!gird)
+        handleView(!gird);
+        console.log(handleView)
+    }
+
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -160,10 +172,10 @@ export default function Header() {
                     color="inherit"
                 >
                     <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
+                        <GridViewOutlinedIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                {/* <p>Notifications</p> */}
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -214,15 +226,34 @@ export default function Header() {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: '11vw' }} >
 
+
+                        {/* grid view and list view icon */}
+
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"
                             color="inherit"
+                            onClick={view}
+                            sx={{ ml: 3 }}
+                        >
+                            <Badge color="error" >
+                                {gird === true ? <GridViewOutlinedIcon /> : <ViewStreamOutlinedIcon />}
+
+
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="inherit"
+
                         >
                             <Badge color="error">
                                 <NotificationsIcon />
+
                             </Badge>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             edge="end"

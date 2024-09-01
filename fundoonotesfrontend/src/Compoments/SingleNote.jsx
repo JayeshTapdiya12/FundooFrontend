@@ -3,9 +3,8 @@ import IconBaar from './IconBaar';
 import '../Style/SingleNote.css';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import PopNote from './PopNote';
-import { findNote } from '../Services/NoteService';
 
-export default function SingleNote({ note, tabV, setNoteCreated, noteCreated }) {
+export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, isGrid }) {
 
     const navigate = useNavigate();
     const { id } = useParams()
@@ -44,13 +43,17 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated }) 
     }
     const closeModal = () => setIsModalOpen(false);
 
+
+
     return (
-        <div className="card-container">
+        <div className={`${isGrid === true ? 'card-container' : 'card-container2'}`}>
             {note.map((ele) => (
                 <NavLink NavLink
                     to={`/dashboard/note/${ele._id}`} key={ele._id}  >
 
-                    <div className="card ,icon-bar-overlay" onClick={openModal}
+
+                    {/* className="card ,icon-bar-overlay" */}
+                    <div className={`${isGrid === true ? 'card ,icon-bar-overlay' : 'card2 ,icon-bar-overlay'}`} onClick={openModal}
                         onMouseEnter={() => handleMouseEnter(ele._id)}
                     >
                         <h2>{ele.title}</h2>

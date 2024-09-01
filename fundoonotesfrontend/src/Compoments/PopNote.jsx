@@ -30,7 +30,8 @@ export default function PopNote({ onClose, setNoteCreated, noteCreated }) {
         <>
             <div className="modal-overlay">
                 <div className="modal-content">
-                    <h2>Note Details</h2>
+                    {/* <h2>Note Details</h2> */}
+                    <br />
                     <InputNote editn={edit} close={close} setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
 
                     {/* <button onClick={close}>Close</button> */}
