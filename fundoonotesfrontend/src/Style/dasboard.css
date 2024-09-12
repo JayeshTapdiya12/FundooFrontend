@@ -37,9 +37,15 @@
 @media (max-width: 768px) {
   .search,
   .singlenote {
+    margin-left: 0;
+
     padding: 10px;
   }
 
+  .search {
+    margin-top: 15vw;
+    margin-left: 7vw;
+  }
   .singlenote {
     justify-content: center;
     padding: 10px;
@@ -49,9 +55,14 @@
 @media (max-width: 480px) {
   .search,
   .singlenote {
+    margin-left: 0;
+    margin-top: 5vw;
     padding: 5px;
   }
-
+  .search {
+    margin-top: 30vw;
+    margin-left: 7vw;
+  }
   .singlenote {
     justify-content: center;
     padding: 5px;
