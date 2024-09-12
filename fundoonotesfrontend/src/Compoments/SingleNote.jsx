@@ -11,18 +11,19 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const handleMouseEnter = (index) => setHoveredIndex(index);
-    const handleMouseLeave = () => setHoveredIndex(null);
+    const handleMouseLeave = (index) => setHoveredIndex(null);
 
     // for icon bar 
     const [icon, setIcon] = useState(2)
 
+    const [bColor, setBColor] = useState('#2e2e2e')
 
     const [data, setData] = useState({
         title: '',
         description: '',
-        color: ''
+        color: bColor
     })
-
+    console.log(bColor)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -48,14 +49,12 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
     return (
         <div className={`${isGrid === true ? 'card-container' : 'card-container2'}`}>
             {note.map((ele) => (
-                <NavLink NavLink
+                <NavLink
                     to={`/dashboard/note/${ele._id}`} key={ele._id}  >
-
-
                     {/* className="card ,icon-bar-overlay" */}
                     <div className={`${isGrid === true ? 'card ,icon-bar-overlay' : 'card2 ,icon-bar-overlay'}`} onClick={openModal}
                         onMouseEnter={() => handleMouseEnter(ele._id)}
-                    >
+                        style={{ backgroundColor: `${ele.color}` }}>
                         <h2>{ele.title}</h2>
                         <p>{ele.description}</p>
 
@@ -63,7 +62,7 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
                     <div>
                         {hoveredIndex === ele._id && (
                             <div className="icon-baar-container" onMouseLeave={handleMouseLeave}>
-                                <IconBaar noteId={ele._id} setIcon={icon} tabV={tabV} setNoteCreated={setNoteCreated} />
+                                <IconBaar noteId={ele._id} setIcon={icon} tabV={tabV} setNoteCreated={setNoteCreated} setBColor={setBColor} />
                             </div>
                         )}
                     </div>

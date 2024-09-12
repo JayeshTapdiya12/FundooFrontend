@@ -128,7 +128,8 @@ export default function SideNav({ tab, view }) {
     const handleChange = (value) => {
         tab(value)
     }
-    // for the gird view and list view
+
+    // for the gird view and list view 
     const handleView = (value) => {
         view(value);
     }

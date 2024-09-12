@@ -6,7 +6,6 @@ import InputNote from '../Compoments/InputNote'
 export default function PopNote({ onClose, setNoteCreated, noteCreated }) {
 
     const { id } = useParams();
-    console.log("id form pop note==============>", id)
 
     // const [data, setData] = useState({
     //     title: "",
@@ -21,9 +20,7 @@ export default function PopNote({ onClose, setNoteCreated, noteCreated }) {
 
 
     const close = () => {
-        console.log(close);
         onClose(true)
-        console.log(close)
     }
 
     return (

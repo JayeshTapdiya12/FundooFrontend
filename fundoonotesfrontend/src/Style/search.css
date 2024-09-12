@@ -73,6 +73,21 @@
     font-size: 14px;
   }
 
+  .note-input {
+    width: 50vw;
+    margin: 0 auto;
+    padding: 10px;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); */
+    background-color: #202124;
+    transition: all 0.3s ease;
+    color: white;
+    /* border: 1px solid white; */
+  }
+  .note-input.expanded {
+    width: 60vw;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
   .note-header {
     flex-direction: column;
     align-items: flex-start;
@@ -98,6 +113,20 @@
     font-size: 12px;
   }
 
+  .note-input {
+    width: 50vw;
+    margin: 0 auto;
+    padding: 10px;
+    /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); */
+    background-color: #202124;
+    transition: all 0.3s ease;
+    color: white;
+    /* border: 1px solid white; */
+  }
+  .note-input.expanded {
+    width: 60vw;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  }
   .note-header {
     align-items: flex-start;
   }
