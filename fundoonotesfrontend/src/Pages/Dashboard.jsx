@@ -36,27 +36,25 @@ export default function Dashboard() {
 
     const filteredData = note.filter(item => {
         if (tabs === 1 && item.isDeleted === false && item.isArchived === false) {
-            // console.log(item)
             return item
         } else if (tabs === 4 && item.isArchived === true) {
-            // console.log(item)
             return item
         } else if (tabs === 5 && item.isDeleted === true) {
-            // console.log(item)
             return item
         }
 
     });
+
     const tab = (value) => {
         setTabs(value)
     }
+
     const [isGrid, setIsGrid] = useState(true);
     const view = (value) => {
         setIsGrid(value);
         console.log(value)
 
     }
-    console.log(isGrid)
 
 
     return (
