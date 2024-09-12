@@ -19,6 +19,9 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ViewStreamOutlinedIcon from '@mui/icons-material/ViewStreamOutlined';
+import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -81,6 +84,12 @@ export default function Header({ handleView }) {
         setGrid(!gird)
         handleView(!gird);
         console.log(handleView)
+    }
+
+    const [dark, setDark] = React.useState(true);
+    const mode = () => {
+        setDark(!dark)
+
     }
 
 
@@ -157,14 +166,7 @@ export default function Header({ handleView }) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            {/* <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="error">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem> */}
+
             <MenuItem>
                 <IconButton
                     size="large"
@@ -177,7 +179,7 @@ export default function Header({ handleView }) {
                 </IconButton>
                 {/* <p>Notifications</p> */}
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
+            <MenuItem onClick={handleMobileMenuOpen}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -229,6 +231,9 @@ export default function Header({ handleView }) {
 
                         {/* grid view and list view icon */}
 
+
+
+
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"
@@ -242,6 +247,22 @@ export default function Header({ handleView }) {
 
                             </Badge>
                         </IconButton>
+
+
+                        <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="inherit"
+                            onClick={mode}
+                            sx={{ ml: 3 }}
+                        >
+                            <Badge color="error" >
+                                {dark === true ? <NightlightRoundIcon /> : <LightModeIcon />}
+
+
+                            </Badge>
+                        </IconButton>
+
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"
