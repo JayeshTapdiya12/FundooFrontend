@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 const baseUrl = "http://localhost:3000/api/v1/note"
+const token = localStorage.getItem("token")
+const headers = { headers: { 'Authorization': 'bearer ' + token } }
 
 export const allnote = async () => {
-
-    const token = localStorage.getItem("token")
-    const headers = { headers: { 'Authorization': 'bearer ' + token } }
 
     const res = axios.get(baseUrl, headers);
     console.log(res);
@@ -16,54 +15,41 @@ export const allnote = async () => {
 export const createNote = async (data) => {
     console.log(data)
 
-    try {
-        const token = localStorage.getItem("token");
-        const header = { headers: { 'Authorization': 'bearer ' + token } }
-        const res = await axios.post(baseUrl, data, header);
-        console.log(res);
-        return res
 
-    } catch (error) {
-        console.error("Error creating note:", error);
-    }
+    const res = await axios.post(baseUrl, data, headers);
+    console.log(res);
+    return res
+
+
 }
 
 
 export const archiveNote = async (id) => {
-    try {
-        const token = localStorage.getItem("token");
-        const headers = { headers: { 'Authorization': "bearer " + token } };
-        const url = `${baseUrl}/${id}/archived`;
-        const res = await axios.post(url, null, headers);
-        return res;
-    } catch (error) {
-        console.error("Failed to archive note:", error);
 
 
-    }
+    const url = `${baseUrl}/${id}/archived`;
+    const res = await axios.post(url, null, headers);
+    return res;
+
 }
 
 
 export const trashNote = async (id) => {
     if (id) {
-        try {
-            const token = localStorage.getItem("token");
-            const headers = { headers: { 'Authorization': "bearer " + token } };
-            const url = `${baseUrl}/${id}/trash`;
-            const res = await axios.post(url, null, headers);
-            return res;
 
-        } catch (error) {
-            console.log("error in the trash note=========>", error)
-        }
+
+        const url = `${baseUrl}/${id}/trash`;
+        const res = await axios.post(url, null, headers);
+        return res;
+
+
     } else {
         console.log("id not found=====>")
     }
 }
 export const findNote = async (id) => {
     if (id) {
-        const token = localStorage.getItem('token');
-        const headers = { headers: { 'Authorization': 'bearer ' + token } };
+
         const url = `${baseUrl}/${id}`;
         const res = await axios.get(url, headers);
         return res;
@@ -83,16 +69,12 @@ export const editNote = async (id, data) => {
     }
 
     if (id && data) {
-        try {
-            const token = localStorage.getItem('token');
 
-            const headers = { headers: { 'Authorization': 'bearer ' + token } };
-            const url = `${baseUrl}/${id}`;
-            const res = await axios.put(url, data, headers);
-            return res;
-        } catch (error) {
-            console.log("error in editing the note=========> innservice", error)
-        }
+
+        const url = `${baseUrl}/${id}`;
+        const res = await axios.put(url, data, headers);
+        return res;
+
     } else {
         console.log("id not found=====>")
     }
@@ -100,21 +82,37 @@ export const editNote = async (id, data) => {
 }
 
 
+export const colorChange = async (id, color) => {
+
+    console.log("hello in color api")
+
+    if (id) {
+
+        const url = `${baseUrl}/${id}/color`;
+        const res = await axios.patch(url, { color }, headers)
+
+        return res;
+
+    }
+    else {
+        console.log("Id note Found")
+    }
+
+}
+
 
 
 export const deleteNote = async (id) => {
     if (id) {
-        try {
-            console.log("id in service========>", id)
-            const token = localStorage.getItem('token');
-            const headers = { headers: { 'Authorization': 'bearer ' + token } }
-            console.log("hearders======>", headers)
-            const url = `${baseUrl}/${id}`;
-            const res = await axios.delete(url, headers);
-            return res;
-        } catch (error) {
-            console.log("error in delte note in service========>", error)
-        }
+
+        console.log("id in service========>", id)
+        const token = localStorage.getItem('token');
+        const headers = { headers: { 'Authorization': 'bearer ' + token } }
+        console.log("hearders======>", headers)
+        const url = `${baseUrl}/${id}`;
+        const res = await axios.delete(url, headers);
+        return res;
+
     } else {
         console.log("id not found=====>")
     }
