@@ -61,7 +61,6 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
 
     const handleToggle = async () => {
         if (edit === true) {
-
             const res = await editNote(id, edata);
             setNoteCreated(true);
             close()
@@ -85,7 +84,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
     return (
         <>
             <div className={`note-input ${isExpanded ? 'expanded' : ''}`}>
-                {(isExpanded || edit == true) && (
+                {(isExpanded || edit === true) && (
                     <div className="note-form">
                         <input
                             type="text"
@@ -115,7 +114,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                         }
                     />
                 </div>
-                {(isExpanded || edit == true) && (
+                {(isExpanded || edit === true) && (
                     <div className="note-footer">
                         <IconBaar setIcon={icon} />
                         <span className="close-btn" onClick={handleToggle}>Close</span>
