@@ -23,7 +23,7 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
         description: '',
         color: bColor
     })
-    console.log(bColor)
+    // console.log(bColor)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
