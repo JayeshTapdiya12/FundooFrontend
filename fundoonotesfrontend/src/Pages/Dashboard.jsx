@@ -52,18 +52,24 @@ export default function Dashboard() {
     const [isGrid, setIsGrid] = useState(true);
     const view = (value) => {
         setIsGrid(value);
-        console.log(value)
+        // console.log(value)
 
     }
 
+    const [mode, setMode] = useState(true);
+
+    const modeValue = (value) => {
+        setMode(value)
+    }
 
     return (
 
         <>
-            <div className="dashboard-container">
-                <SideNav tab={tab} view={view} />
+            <div className={`${mode === true ? 'dashboard-container' : 'dashboard-container2'}`}>
+                {/* `${mode === true ? 'dashboard-container' : 'dashboard-container2'}` */}
+                <SideNav tab={tab} view={view} modeValue={modeValue} />
 
-                {tabs === 1 ? <div className="search">
+                {tabs === 1 ? <div className={`${mode === true ? 'search' : 'search2'}`}>
                     <InputNote setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
                 </div> : <div style={{ marginTop: "5vw" }}></div>}
 
