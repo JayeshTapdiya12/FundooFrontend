@@ -17,7 +17,7 @@ import UnarchiveIcon from '@mui/icons-material/UnarchiveOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 
-export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor }) {
+export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor, input, handleCol }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const { id } = useParams();
@@ -85,41 +85,41 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor }) {
                                 <GroupAddIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Colors" arrow>
-                            <IconButton onClick={handleToggle}>
-                                <ColorLensOutlinedIcon />
-                                {isExpanded && (
-                                    <div className="color-picker-container">
-                                        <ColorPicker setNoteCreated={setNoteCreated} />
-                                    </div>
-                                )}
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Ideas" arrow>
-                            <IconButton>
-                                <LightbulbIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Archive" arrow>
-                            <IconButton onClick={archi}>
-                                <ArchiveOutlined />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="More Options" arrow>
-                            <IconButton>
-                                <BasicMenu setNoteCreated={setNoteCreated} />
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title="Colors" arrow> */}
+                        <IconButton onClick={handleToggle}>
+                            <ColorLensOutlinedIcon />
+                            {isExpanded && (
+                                <div className="color-picker-container">
+                                    <ColorPicker setNoteCreated={setNoteCreated} input={input} handleCol={handleCol} />
+                                </div>
+                            )}
+                        </IconButton>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Ideas" arrow> */}
+                        <IconButton>
+                            <LightbulbIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Archive" arrow> */}
+                        <IconButton onClick={archi}>
+                            <ArchiveOutlined />
+                        </IconButton>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="More Options" arrow> */}
+                        <IconButton>
+                            <BasicMenu setNoteCreated={setNoteCreated} />
+                        </IconButton>
+                        {/* </Tooltip> */}
                         <Tooltip title="Undo" arrow>
                             <IconButton>
                                 <ArrowBackIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Redo" arrow>
-                            <IconButton>
-                                <ArrowForwardIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title="Redo" arrow> */}
+                        <IconButton>
+                            <ArrowForwardIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
                     </>
                 );
             case setIcon === 2 && tabV === 1:
@@ -135,56 +135,56 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor }) {
                                 <GroupAddIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Colors" arrow>
-                            <IconButton onClick={handleToggle}>
-                                <ColorLensOutlinedIcon />
-                                {isExpanded && (
-                                    <div className="color-picker-container">
-                                        <ColorPicker setNoteCreated={setNoteCreated} />
-                                    </div>
-                                )}
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title="Colors" arrow> */}
+                        <IconButton onClick={handleToggle}>
+                            <ColorLensOutlinedIcon />
+                            {isExpanded && (
+                                <div className="color-picker-container">
+                                    <ColorPicker setNoteCreated={setNoteCreated} />
+                                </div>
+                            )}
+                        </IconButton>
+                        {/* </Tooltip> */}
                         <Tooltip title="Ideas" arrow>
                             <IconButton>
                                 <LightbulbIcon />
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Archive" arrow>
-                            <IconButton onClick={archi}>
-                                <ArchiveOutlined />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="More Options" arrow>
-                            <IconButton>
-                                <BasicMenu />
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title/</>="Archive" arrow> */}
+                        <IconButton onClick={archi}>
+                            <ArchiveOutlined />
+                        </IconButton>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="More Options" arrow> */}
+                        <IconButton onClick={trash}>
+                            <RestoreFromTrashOutlinedIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
                     </>
                 );
             case tabV === 4:
                 return (
                     <>
-                        <Tooltip title="Archive" arrow>
-                            <IconButton onClick={archi}>
-                                <UnarchiveIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title="Archive" arrow> */}
+                        <IconButton onClick={archi}>
+                            <UnarchiveIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
                     </>
                 );
             case tabV === 5:
                 return (
                     <>
-                        <Tooltip title="Trash" arrow>
-                            <IconButton onClick={trash}>
-                                <RestoreFromTrashOutlinedIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Delete Forever" arrow>
-                            <IconButton onClick={deleteF}>
-                                <DeleteForeverOutlinedIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {/* <Tooltip title="Trash" arrow> */}
+                        <IconButton onClick={trash}>
+                            <RestoreFromTrashOutlinedIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Delete Forever" arrow> */}
+                        <IconButton onClick={deleteF}>
+                            <DeleteForeverOutlinedIcon />
+                        </IconButton>
+                        {/* </Tooltip> */}
                     </>
                 );
             default:
