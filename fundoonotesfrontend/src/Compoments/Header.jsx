@@ -66,7 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-export default function Header({ handleView }) {
+export default function Header({ handleView, handleMode }) {
 
 
     const navigate = useNavigate();
@@ -83,13 +83,13 @@ export default function Header({ handleView }) {
     const view = () => {
         setGrid(!gird)
         handleView(!gird);
-        console.log(handleView)
+        // console.log(handleView)
     }
 
     const [dark, setDark] = React.useState(true);
     const mode = () => {
         setDark(!dark)
-
+        handleMode(!dark)
     }
 
 
