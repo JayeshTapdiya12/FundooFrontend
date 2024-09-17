@@ -95,7 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function SideNav({ tab, view }) {
+export default function SideNav({ tab, view, modeValue }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -133,6 +133,9 @@ export default function SideNav({ tab, view }) {
     const handleView = (value) => {
         view(value);
     }
+    const handleMode = (value) => {
+        modeValue(value);
+    }
 
     return (
         <Box sx={{ display: 'flex' }} style={{ backgroundColor: "#202124" }}>
@@ -158,7 +161,7 @@ export default function SideNav({ tab, view }) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div" >
-                        <Header handleView={handleView} />
+                        <Header handleView={handleView} handleMode={handleMode} />
                     </Typography>
                 </Toolbar>
             </AppBar>
