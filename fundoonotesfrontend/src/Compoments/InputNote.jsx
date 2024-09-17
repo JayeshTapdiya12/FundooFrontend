@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../Style/search.css';
 import IconBaar from './IconBaar';
 import { createNote, editNote, findNote } from '../Services/NoteService';
@@ -21,6 +21,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
     }, [id]);
 
 
+    const [input, setInput] = useState(true);
 
 
     // for icon bar
@@ -32,19 +33,32 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         color: ""
     });
 
+    const [col, setCol] = useState("");
+
     const [data, setData] = useState({
         title: "",
         description: "",
-        color: ""
+        color: col
     });
 
     const handleOpen = () => {
         setIsExpanded(true);
     };
 
+    const handleCol = (value) => {
+        setCol(value);
+        setData(prevDetails => ({
+            ...prevDetails,
+
+            color: value
+        }));
+
+    }
+
     const send = async () => {
         try {
             if (data.title !== "" || data.description !== "") {
+
                 const res = await createNote(data);
                 console.log(res);
                 setNoteCreated(true);
@@ -67,6 +81,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         } else {
             if (data.title === "" && data.description === "") {
                 setIsExpanded(false);
+                setCol("")
             } else {
                 await send();
                 setIsExpanded(false);
@@ -75,6 +90,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                     description: "",
                     color: ""
                 });
+                setCol("")
             }
         }
     };
@@ -83,9 +99,9 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
 
     return (
         <>
-            <div className={`note-input ${isExpanded ? 'expanded' : ''}`}>
+            <div className={`note-input ${isExpanded ? 'expanded' : ''}`} style={{ backgroundColor: `${col}` }}>
                 {(isExpanded || edit === true) && (
-                    <div className="note-form">
+                    <div className="note-form" >
                         <input
                             type="text"
                             placeholder="Title"
@@ -100,7 +116,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                         />
                     </div>
                 )}
-                <div className="note-header" onClick={handleOpen}>
+                <div className="note-header" onClick={handleOpen} >
                     <input
                         type="text"
                         placeholder="Take a note..."
@@ -115,8 +131,8 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                     />
                 </div>
                 {(isExpanded || edit === true) && (
-                    <div className="note-footer">
-                        <IconBaar setIcon={icon} />
+                    <div className="note-footer" style={{ backgroundColor: `${col}` }}>
+                        <IconBaar setIcon={icon} input={input} handleCol={handleCol} />
                         <span className="close-btn" onClick={handleToggle}>Close</span>
                     </div>
                 )}
