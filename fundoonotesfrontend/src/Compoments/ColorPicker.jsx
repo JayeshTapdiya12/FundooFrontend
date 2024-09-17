@@ -18,7 +18,7 @@ const colors = [
     "#80CBC4"
 ];
 
-export default function ColorPicker({ setNoteCreated }) {
+export default function ColorPicker({ setNoteCreated, input, handleCol }) {
 
     const UserContext = createContext()
 
@@ -26,18 +26,20 @@ export default function ColorPicker({ setNoteCreated }) {
     const [selectedColor, setSelectedColor] = useState('');
 
     const send = async (color) => {
+
         const res = await colorChange(id, color);
+
         setNoteCreated(true)
         console.log(res);
     }
 
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-
-        if (color) {
+        handleCol(color)
+        if (!input && color) {
             send(color);
         }
-        console.log(color)
+
     };
 
     return (
