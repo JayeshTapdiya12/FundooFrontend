@@ -15,6 +15,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         const fetchNote = async () => {
             const res = await findNote(id);
             setEData(res?.data?.data);
+            console.log(res?.data?.data)
         };
         fetchNote();
         // setIsExpanded(true)
@@ -27,18 +28,20 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
     // for icon bar
     const [icon, setIcon] = useState(1);
 
+
+
+    const [col, setCol] = useState("");
+
     const [edata, setEData] = useState({
         title: "",
         description: "",
-        color: ""
+        color: col
     });
-
-    const [col, setCol] = useState("");
 
     const [data, setData] = useState({
         title: "",
         description: "",
-        color: col
+        color: ""
     });
 
     const handleOpen = () => {
@@ -47,6 +50,11 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
 
     const handleCol = (value) => {
         setCol(value);
+        setEData(prevDetails => ({
+            ...prevDetails,
+
+            color: value
+        }));
         setData(prevDetails => ({
             ...prevDetails,
 
@@ -99,7 +107,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
 
     return (
         <>
-            <div className={`note-input ${isExpanded ? 'expanded' : ''}`} style={{ backgroundColor: `${col}` }}>
+            <div className={`note-input ${isExpanded ? 'expanded' : ''}`} style={{ backgroundColor: (edit === true) ? edata.color : col }} >
                 {(isExpanded || edit === true) && (
                     <div className="note-form" >
                         <input
@@ -113,6 +121,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                                     ? setEData({ ...edata, [e.target.name]: e.target.value })
                                     : setData({ ...data, [e.target.name]: e.target.value })
                             }
+
                         />
                     </div>
                 )}
@@ -128,10 +137,11 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                                 ? setEData({ ...edata, [e.target.name]: e.target.value })
                                 : setData({ ...data, [e.target.name]: e.target.value })
                         }
+
                     />
                 </div>
                 {(isExpanded || edit === true) && (
-                    <div className="note-footer" style={{ backgroundColor: `${col}` }}>
+                    <div className="note-footer" >
                         <IconBaar setIcon={icon} input={input} handleCol={handleCol} />
                         <span className="close-btn" onClick={handleToggle}>Close</span>
                     </div>
