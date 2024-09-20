@@ -106,8 +106,6 @@ export const deleteNote = async (id) => {
     if (id) {
 
         console.log("id in service========>", id)
-        const token = localStorage.getItem('token');
-        const headers = { headers: { 'Authorization': 'bearer ' + token } }
         console.log("hearders======>", headers)
         const url = `${baseUrl}/${id}`;
         const res = await axios.delete(url, headers);

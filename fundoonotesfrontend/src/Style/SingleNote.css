@@ -70,7 +70,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  /* this is to  make the  */
+
   margin-top: -10vh;
 }
 
@@ -81,5 +81,39 @@
     gap: 16px;
     padding: 16vw;
     margin-left: 12vw;
+    /* margin-top: 10px; */
+  }
+
+  .card-container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16vw;
+    margin-left: 12vw;
+    margin-top: 10px;
+  }
+
+  .card2 {
+    background-color: #2e2e2e;
+    color: #fff;
+    padding: 16px;
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    height: 27vh;
+    margin: 5vw;
+  }
+  .card {
+    position: relative;
+    background-color: #2e2e2e;
+    color: #fff;
+    padding: 16px;
+    width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    height: 27vh;
+    margin: 5vw;
   }
 }

@@ -32,18 +32,25 @@ export default function Dashboard() {
         getNotes();
     }, [noteCreated])
 
+    const [sear, setSear] = useState('');
 
 
     const filteredData = note.filter(item => {
-        if (tabs === 1 && item.isDeleted === false && item.isArchived === false) {
-            return item
-        } else if (tabs === 4 && item.isArchived === true) {
-            return item
-        } else if (tabs === 5 && item.isDeleted === true) {
-            return item
+        if (tabs === 1 && !item.isDeleted && !item.isArchived) {
+            return item.title.includes(sear) || item.description.includes(sear);
+        } else if (tabs === 4 && item.isArchived) {
+            return item.title.includes(sear) || item.description.includes(sear);
+        } else if (tabs === 5 && item.isDeleted) {
+            return item.title.includes(sear) || item.description.includes(sear);
         }
-
+        return false;  // Exclude items that don't match any condition
     });
+
+    const filt = (value) => {
+        setSear(value);
+
+    }
+
 
     const tab = (value) => {
         setTabs(value)
@@ -52,18 +59,24 @@ export default function Dashboard() {
     const [isGrid, setIsGrid] = useState(true);
     const view = (value) => {
         setIsGrid(value);
-        console.log(value)
+        // console.log(value)
 
     }
 
+    const [mode, setMode] = useState(true);
+
+    const modeValue = (value) => {
+        setMode(value)
+    }
 
     return (
 
         <>
-            <div className="dashboard-container">
-                <SideNav tab={tab} view={view} />
+            <div className={`${mode === true ? 'dashboard-container' : 'dashboard-container2'}`}>
+                {/* `${mode === true ? 'dashboard-container' : 'dashboard-container2'}` */}
+                <SideNav tab={tab} view={view} modeValue={modeValue} filt={filt} />
 
-                {tabs === 1 ? <div className="search">
+                {tabs === 1 ? <div className={`${mode === true ? 'search' : 'search2'}`}>
                     <InputNote setNoteCreated={setNoteCreated} noteCreated={noteCreated} />
                 </div> : <div style={{ marginTop: "5vw" }}></div>}
 

@@ -11,17 +11,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/SettingsOutlined';
-import google from '../Assests/googlekeepimg.png'
+import google from '../Assests/googlekeepimg.png';
 import { useNavigate } from 'react-router-dom';
-// import '../Style/header.css '
-import Button from '@mui/material/Button';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ViewStreamOutlinedIcon from '@mui/icons-material/ViewStreamOutlined';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import LightModeIcon from '@mui/icons-material/LightMode';
-
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -53,7 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -63,12 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-
-
-
-export default function Header({ handleView }) {
-
-
+export default function Header({ handleView, handleMode, fit }) {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -77,21 +68,21 @@ export default function Header({ handleView }) {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+    const [search, setSearch] = React.useState('')
 
 
-    const [gird, setGrid] = React.useState(true)
+
+    const [grid, setGrid] = React.useState(true);
     const view = () => {
-        setGrid(!gird)
-        handleView(!gird);
-        console.log(handleView)
-    }
+        setGrid(!grid);
+        handleView(!grid);
+    };
 
     const [dark, setDark] = React.useState(true);
     const mode = () => {
-        setDark(!dark)
-
-    }
-
+        setDark(!dark);
+        handleMode(!dark);
+    };
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -110,18 +101,15 @@ export default function Header({ handleView }) {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const logout = () => {
-        localStorage.clear('token')
-        navigate('/login')
 
+    const sear = (e) => {
+        setSearch(e.target.value)
+        fit(e.target.value)
     }
-    // const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
+
+    const logout = () => {
+        localStorage.clear('token');
+        navigate('/login');
     };
 
     const menuId = 'primary-search-account-menu';
@@ -143,9 +131,6 @@ export default function Header({ handleView }) {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={logout}>Logout</MenuItem>
-
-
-            {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
         </Menu>
     );
 
@@ -166,30 +151,17 @@ export default function Header({ handleView }) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <GridViewOutlinedIcon />
-                    </Badge>
-                </IconButton>
-                {/* <p>Notifications</p> */}
-            </MenuItem>
-            <MenuItem onClick={handleMobileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
+            {/* <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton size="large" color="inherit">
                     <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
+            </MenuItem> */}
+            <MenuItem onClick={logout}>
+                <IconButton size="large" color="inherit">
+                    <AccountCircle />
+                </IconButton>
+                <p>Logout</p>
             </MenuItem>
         </Menu>
     );
@@ -198,88 +170,64 @@ export default function Header({ handleView }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" style={{ backgroundColor: "#202124" }}>
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <img src={google} alt="google keep  img" />
+                    {/* Google Keep logo and title */}
+                    <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+                        <img src={google} alt="google keep img" />
                     </IconButton>
 
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
+                    <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
                         Keep
                     </Typography>
+
+                    {/* Search field */}
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
+
+                        <StyledInputBase type='text' placeholder="Search" inputProps={{ 'aria-label': 'search' }} onChange={sear} />
+
                     </Search>
+
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: '11vw' }} >
 
-
-                        {/* grid view and list view icon */}
-
-
-
-
+                    {/* Hamburger Menu Icon for Mobile */}
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }} style={{ marginLeft: "-120px" }}>
                         <IconButton
                             size="large"
-                            aria-label="show 17 new notifications"
+                            aria-label="open mobile menu"
+                            edge="end"
                             color="inherit"
-                            onClick={view}
-                            sx={{ ml: 3 }}
+                            onClick={handleMobileMenuOpen}
                         >
-                            <Badge color="error" >
-                                {gird === true ? <GridViewOutlinedIcon /> : <ViewStreamOutlinedIcon />}
+                            <MenuIcon />
+                        </IconButton>
+                    </Box>
 
-
+                    {/* Icons for Desktop View */}
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                        <IconButton size="large" onClick={view} sx={{ ml: 3 }} color="inherit">
+                            <Badge color="error">
+                                {grid ? <GridViewOutlinedIcon /> : <ViewStreamOutlinedIcon />}
                             </Badge>
                         </IconButton>
 
-
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                            onClick={mode}
-                            sx={{ ml: 3 }}
-                        >
-                            <Badge color="error" >
-                                {dark === true ? <NightlightRoundIcon /> : <LightModeIcon />}
-
-
+                        <IconButton size="large" onClick={mode} sx={{ ml: 3 }} color="inherit">
+                            <Badge color="error">
+                                {dark ? <NightlightRoundIcon /> : <LightModeIcon />}
                             </Badge>
                         </IconButton>
 
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-
-                        >
+                        <IconButton size="large" color="inherit">
                             <Badge color="error">
                                 <NotificationsIcon />
-
                             </Badge>
                         </IconButton>
 
                         <IconButton
                             size="large"
                             edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
+                            aria-controls="primary-search-account-menu"
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"
@@ -289,8 +237,12 @@ export default function Header({ handleView }) {
                     </Box>
                 </Toolbar>
             </AppBar>
+
+            {/* Render Mobile Menu */}
             {renderMobileMenu}
+
+            {/* Optional Desktop Menu */}
             {renderMenu}
         </Box>
-    )
+    );
 }

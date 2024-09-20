@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../Style/search.css';
 import IconBaar from './IconBaar';
 import { createNote, editNote, findNote } from '../Services/NoteService';
@@ -15,21 +15,27 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         const fetchNote = async () => {
             const res = await findNote(id);
             setEData(res?.data?.data);
+            console.log(res?.data?.data)
         };
         fetchNote();
         // setIsExpanded(true)
     }, [id]);
 
 
+    const [input, setInput] = useState(true);
 
 
     // for icon bar
     const [icon, setIcon] = useState(1);
 
+
+
+    const [col, setCol] = useState("");
+
     const [edata, setEData] = useState({
         title: "",
         description: "",
-        color: ""
+        color: col
     });
 
     const [data, setData] = useState({
@@ -42,9 +48,25 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         setIsExpanded(true);
     };
 
+    const handleCol = (value) => {
+        setCol(value);
+        setEData(prevDetails => ({
+            ...prevDetails,
+
+            color: value
+        }));
+        setData(prevDetails => ({
+            ...prevDetails,
+
+            color: value
+        }));
+
+    }
+
     const send = async () => {
         try {
             if (data.title !== "" || data.description !== "") {
+
                 const res = await createNote(data);
                 console.log(res);
                 setNoteCreated(true);
@@ -67,6 +89,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         } else {
             if (data.title === "" && data.description === "") {
                 setIsExpanded(false);
+                setCol("")
             } else {
                 await send();
                 setIsExpanded(false);
@@ -75,6 +98,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                     description: "",
                     color: ""
                 });
+                setCol("")
             }
         }
     };
@@ -83,9 +107,9 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
 
     return (
         <>
-            <div className={`note-input ${isExpanded ? 'expanded' : ''}`}>
+            <div className={`note-input ${isExpanded ? 'expanded' : ''}`} style={{ backgroundColor: (edit === true) ? edata.color : col }} >
                 {(isExpanded || edit === true) && (
-                    <div className="note-form">
+                    <div className="note-form" >
                         <input
                             type="text"
                             placeholder="Title"
@@ -97,10 +121,11 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                                     ? setEData({ ...edata, [e.target.name]: e.target.value })
                                     : setData({ ...data, [e.target.name]: e.target.value })
                             }
+
                         />
                     </div>
                 )}
-                <div className="note-header" onClick={handleOpen}>
+                <div className="note-header" onClick={handleOpen} >
                     <input
                         type="text"
                         placeholder="Take a note..."
@@ -112,11 +137,12 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                                 ? setEData({ ...edata, [e.target.name]: e.target.value })
                                 : setData({ ...data, [e.target.name]: e.target.value })
                         }
+
                     />
                 </div>
                 {(isExpanded || edit === true) && (
-                    <div className="note-footer">
-                        <IconBaar setIcon={icon} />
+                    <div className="note-footer" >
+                        <IconBaar setIcon={icon} input={input} handleCol={handleCol} />
                         <span className="close-btn" onClick={handleToggle}>Close</span>
                     </div>
                 )}
