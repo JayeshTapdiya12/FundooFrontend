@@ -90,7 +90,7 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor, inp
                             <ColorLensOutlinedIcon />
                             {isExpanded && (
                                 <div className="color-picker-container">
-                                    <ColorPicker setNoteCreated={setNoteCreated} input={input} handleCol={handleCol} />
+                                    <ColorPicker setNoteCreated={setNoteCreated} input={input} handleCol={handleCol} setIcon={setIcon} />
                                 </div>
                             )}
                         </IconButton>
