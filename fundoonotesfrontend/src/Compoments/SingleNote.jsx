@@ -54,8 +54,10 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
                     {/* className="card ,icon-bar-overlay" */}
                     <div className={`${isGrid === true ? 'card ,icon-bar-overlay' : 'card2 ,icon-bar-overlay'}`} onClick={openModal}
                         onMouseEnter={() => handleMouseEnter(ele._id)}
-                        style={{ backgroundColor: `${ele.color}` }}>
-                        <h2>{ele.title}</h2>
+                        style={{
+                            backgroundColor: `${ele.color}`
+                        }}>
+                        <h2  >{ele.title}</h2>
                         <p>{ele.description}</p>
 
                     </div>
