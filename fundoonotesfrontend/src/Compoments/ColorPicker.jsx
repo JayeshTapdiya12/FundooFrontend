@@ -7,9 +7,7 @@ import { colorChange } from '../Services/NoteService';
 const colors = [
     "#000", "#a53265", "#123456",
     "#678910", "#135910", "#987654",
-    "#654321", "#F29677", "#456321", "#987123",
-    "#BB86FC",
-    "#03DAC6",
+    "#654321", "#F29677", "#456321", "#987123", "#BB86FC", "#03DAC6",
     "#CF6679",
     "#E0E0E0",
     "#3A3A3A",
@@ -18,7 +16,7 @@ const colors = [
     "#80CBC4"
 ];
 
-export default function ColorPicker({ setNoteCreated, input, handleCol }) {
+export default function ColorPicker({ setNoteCreated, input, handleCol, setIcon }) {
 
     const UserContext = createContext()
 
@@ -35,8 +33,9 @@ export default function ColorPicker({ setNoteCreated, input, handleCol }) {
 
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-        handleCol(color)
-        if (!input && color) {
+
+        if (setIcon === 1) { handleCol(color) }
+        else if (color) {
             send(color);
         }
 
