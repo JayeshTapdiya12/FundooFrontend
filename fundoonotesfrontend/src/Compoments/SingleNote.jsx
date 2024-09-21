@@ -27,17 +27,6 @@ export default function SingleNote({ note, tabV, setNoteCreated, noteCreated, is
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-    // const find = async () => {
-    //     const res = await findNote(id);
-    //     const data1 = res?.data?.data;
-    //     setData({
-    //         title: data1.title,
-    //         description: data1.description,
-    //         color: data1.color
-    //     })
-    // }
-
-
     const openModal = () => {
         setIsModalOpen(true);
         // find()
