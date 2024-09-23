@@ -21,10 +21,10 @@ export default function BasicMenu({ setNoteCreated }) {
 
     const trash = async () => {
         if (id) {
-            console.log(id)
+
             try {
                 const res = await trashNote(id);
-                console.log("trashed the note", res);
+
                 setNoteCreated(true)
 
                 handleClose();

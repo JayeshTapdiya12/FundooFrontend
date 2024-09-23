@@ -28,7 +28,7 @@ export default function ColorPicker({ setNoteCreated, input, handleCol, setIcon 
         const res = await colorChange(id, color);
 
         setNoteCreated(true)
-        console.log(res);
+
     }
 
     const handleColorSelect = (color) => {

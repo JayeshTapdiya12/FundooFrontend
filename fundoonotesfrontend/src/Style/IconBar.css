@@ -67,6 +67,9 @@
 }
 
 @media (max-width: 480px) {
+  .icon-group {
+    max-width: 100%;
+  }
   .icon-bar {
     padding: 8px 10px;
   }

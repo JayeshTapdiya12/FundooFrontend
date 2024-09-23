@@ -65,12 +65,13 @@ export default function SignUp() {
         setShowPassword(e.target.checked);
     };
 
-    const send = async () => {
+    const send = async (userDetails) => {
         if (userDetails.email === "" || userDetails.password === "" || userDetails.name === "" || userDetails.lname === "") {
             alert("Please enter all the details.");
         } else {
             try {
                 let res = await signup(userDetails);
+
                 navigate('/login');
             } catch (error) {
                 alert("Sign-up failed. Please try again.");
@@ -92,14 +93,13 @@ export default function SignUp() {
         }
 
         if (password === cPassword) {
-            setUserDetails(prevDetails => ({
-                ...prevDetails,
+            const updatedUserDetails = {
                 name: firstName,
                 lname: lastName,
                 email: email,
                 password: password
-            }));
-            send();
+            };
+            await send(updatedUserDetails);
         } else {
             alert("Passwords don't match");
         }
@@ -168,7 +168,7 @@ export default function SignUp() {
                                     value={cPassword}
                                     onChange={(e) => {
                                         setCPassword(e.target.value);
-                                        handlePasswordChange(e);
+                                        // handlePasswordChange(e);
                                     }}
                                 />
                             </Box>

@@ -32,7 +32,7 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor, inp
         if (id) {
             try {
                 const res = await archiveNote(id);
-                console.log('Note archived:', res);
+
                 setNoteCreated(true);
             } catch (error) {
                 console.error('Failed to archive note:', error);
@@ -46,7 +46,7 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor, inp
         if (id) {
             try {
                 const res = await trashNote(id);
-                console.log("Trashed the note", res);
+
                 setNoteCreated(true);
             } catch (error) {
                 console.log("Failed to Trash the NOTE", error);
@@ -60,7 +60,7 @@ export default function IconBaar({ setIcon, tabV, setNoteCreated, setBColor, inp
         if (id) {
             try {
                 const res = await deleteNote(id);
-                console.log("Note deleted:", res);
+
                 setNoteCreated(true);
             } catch (error) {
                 console.log("Failed to Delete Forever the NOTE", error);

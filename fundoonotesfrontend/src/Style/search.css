@@ -106,6 +106,7 @@
 @media (max-width: 480px) {
   .note-input {
     padding: 6px;
+    width: 100%;
   }
 
   .note-form .title-input,

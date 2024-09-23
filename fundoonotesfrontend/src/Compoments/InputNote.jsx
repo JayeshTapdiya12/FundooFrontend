@@ -15,7 +15,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
         const fetchNote = async () => {
             const res = await findNote(id);
             setEData(res?.data?.data);
-            console.log(res?.data?.data)
+
         };
         fetchNote();
         // setIsExpanded(true)
@@ -68,7 +68,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
             if (data.title !== "" || data.description !== "") {
 
                 const res = await createNote(data);
-                console.log(res);
+
                 setNoteCreated(true);
 
             } else {
@@ -86,6 +86,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
             const res = await editNote(id, edata);
             setNoteCreated(true);
             close()
+
         } else {
             if (data.title === "" && data.description === "") {
                 setIsExpanded(false);

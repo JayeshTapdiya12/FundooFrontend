@@ -7,17 +7,16 @@ const headers = { headers: { 'Authorization': 'bearer ' + token } }
 export const allnote = async () => {
 
     const res = axios.get(baseUrl, headers);
-    console.log(res);
+
     return res;
 
 }
 
 export const createNote = async (data) => {
-    console.log(data)
+
 
 
     const res = await axios.post(baseUrl, data, headers);
-    console.log(res);
     return res
 
 
@@ -84,7 +83,6 @@ export const editNote = async (id, data) => {
 
 export const colorChange = async (id, color) => {
 
-    console.log("hello in color api")
 
     if (id) {
 
@@ -105,8 +103,6 @@ export const colorChange = async (id, color) => {
 export const deleteNote = async (id) => {
     if (id) {
 
-        console.log("id in service========>", id)
-        console.log("hearders======>", headers)
         const url = `${baseUrl}/${id}`;
         const res = await axios.delete(url, headers);
         return res;
