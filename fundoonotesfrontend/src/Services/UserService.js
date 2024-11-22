@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Navigate } from 'react-router-dom';
 
-const baseUrl = "http://localhost:3000/api/v1/users/";
+const baseUrl = "https://fundoo-notes-chi.vercel.app//users/";
 
 export const login = (value) => {
     let data = {
