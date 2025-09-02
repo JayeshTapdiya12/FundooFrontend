@@ -176,7 +176,7 @@ export default function Header({ handleView, handleMode, fit }) {
                     </IconButton>
 
                     <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        NoteSphere
+                        SparkMeno
                     </Typography>
 
                     {/* Search field */}

@@ -1,120 +1,151 @@
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 16px;
-  margin-left: 12vw;
-  /* width: 100%; */
-  /* height: 20vh; */
-  /* background-color: #2e2e2e2a; */
-}
-
+.card-container,
 .card-container2 {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   gap: 16px;
   padding: 16px;
-  align-items: center;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
 }
+
+.card,
 .card2 {
   background-color: #2e2e2e;
   color: #fff;
   padding: 16px;
-  width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-  height: 27vh;
-  margin-left: 10vw;
-}
-
-.card {
-  position: relative;
-  background-color: #2e2e2e;
-  color: #fff;
-  padding: 16px;
   width: 350px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-  height: 27vh;
+  border-radius: 5vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  position: relative; /* To position icon bar absolutely */
+  overflow: hidden; /* Prevent the icon bar from overflowing outside */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  height: auto; /* Fixed height */
+  margin: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box; /* Ensure padding doesn’t affect the card size */
 }
 
-.card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+/* Styles for card when hovered */
+.card:hover,
+.card2:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
 
+/* Icon bar container that appears on hover */
 .icon-bar-overlay {
   position: absolute;
-  bottom: 0;
+  bottom: 0; /* Place at the bottom of the card */
   left: 0;
   width: 100%;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
   display: flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  justify-content: left;
+  opacity: 0; /* Initially hidden */
+  padding: 10px 0; /* Padding for icon bar */
+  /* z-index: 10; Ensure the icon bar is above the card content */
+  box-sizing: border-box; /* Prevent padding from causing overflow */
+  transition: opacity 0.3s ease; /* Smooth fade-in effect */
 }
 
-.card:hover .icon-bar-overlay {
-  opacity: 1;
+/* Show the icon bar when hovering over the card */
+.card:hover .icon-bar-overlay,
+.card2:hover .icon-bar-overlay {
+  opacity: 1; /* Make icon bar visible on hover */
 }
 
-.icon-baar-container {
-  width: 100%;
+/* Inside the icon bar, position icons */
+.icon-group {
   display: flex;
-  justify-content: center;
-
-  margin-top: -10vh;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  flex-wrap: wrap;
 }
 
+/* Style for individual icon buttons */
+.icon-group .MuiIconButton-root {
+  color: #ffffff; /* White icons for better visibility */
+}
+
+/* Color picker container inside icon bar */
+/* .color-picker-container {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 100;
+} */
+
+/* Layout for the note with title and description */
+.card h2,
+.card2 h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card p,
+.card2 p {
+  font-size: 14px;
+  margin: 8px 0;
+  word-wrap: break-word;
+}
+
+/* Chips for labels inside the note */
+.chip-container {
+  margin-top: 10px;
+}
+
+.card-container .chip-container,
+.card-container2 .chip-container {
+  margin-top: 10px;
+}
+
+/* Styles for the chip label elements */
+.MuiChip-root {
+  color: white; /* Chip label color */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  margin: 2px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16vw;
-    margin-left: 12vw;
-
-    /* margin-top: 10px; */
-  }
-
-  .card-container2 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16vw;
-    margin-left: 12vw;
-    margin-top: 10px;
-  }
-
+  .card,
   .card2 {
-    background-color: #2e2e2e;
-    color: #fff;
+    width: 100%;
+    height: auto; /* Allow height to adjust based on content */
     padding: 16px;
-    width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-    height: 27vh;
     margin: 5vw;
   }
-  .card {
-    position: relative;
-    background-color: #2e2e2e;
-    color: #fff;
-    padding: 16px;
-    width: 350px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-    height: 27vh;
+
+  .card-container,
+  .card-container2 {
+    padding: 5vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .card,
+  .card2 {
+    width: 100%;
+    height: auto;
     margin: 5vw;
+  }
+
+  .card-container,
+  .card-container2 {
+    padding: 5vw;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

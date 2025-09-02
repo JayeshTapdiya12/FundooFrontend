@@ -144,7 +144,7 @@ export default function InputNote({ setNoteCreated, editn, close, noteCreated })
                 {(isExpanded || edit === true) && (
                     <div className="note-footer" >
                         <IconBaar setIcon={icon} input={input} handleCol={handleCol} />
-                        <span className="close-btn" onClick={handleToggle}>Close</span>
+                        <span className="close-btn" onClick={handleToggle} style={{ marginTop: "20px" }}>Close</span>
                     </div>
                 )}
             </div>

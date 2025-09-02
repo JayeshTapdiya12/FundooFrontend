@@ -6,7 +6,7 @@
   border-top: 1px solid #444;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   border-radius: 0 0 8px 8px; /* Rounded bottom corners */
 }
 

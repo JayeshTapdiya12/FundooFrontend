@@ -21,7 +21,8 @@ function Login() {
         } else {
             try {
                 let res = await login(userDetails);
-                localStorage.setItem("token", res?.data?.data);
+                // console.log(res?.data?.data.token);
+                localStorage.setItem("token", res?.data?.data?.token);
                 navigate('/dashboard');
             } catch (error) {
                 setAlert(<Alert severity="error">Login failed. Please try again.</Alert>);

@@ -42,6 +42,10 @@ export default function Dashboard() {
             return item.title.includes(sear) || item.description.includes(sear);
         } else if (tabs === 5 && item.isDeleted) {
             return item.title.includes(sear) || item.description.includes(sear);
+        } else if (tabs === 3 && item.label) {
+            console.log(item?.label)
+
+            return item.label;
         }
         return false;  // Exclude items that don't match any condition
     });
@@ -68,6 +72,8 @@ export default function Dashboard() {
     const modeValue = (value) => {
         setMode(value)
     }
+
+    console.log(filteredData);
 
     return (
 

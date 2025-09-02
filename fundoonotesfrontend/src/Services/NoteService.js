@@ -6,7 +6,8 @@ const headers = { headers: { 'Authorization': 'bearer ' + token } }
 
 export const allnote = async () => {
 
-    const res = axios.get(baseUrl, headers);
+    const url = `${baseUrl}/getallnotes`
+    const res = axios.get(url, headers);
 
     return res;
 
@@ -15,8 +16,8 @@ export const allnote = async () => {
 export const createNote = async (data) => {
 
 
-
-    const res = await axios.post(baseUrl, data, headers);
+    const url = `${baseUrl}/addnote`
+    const res = await axios.post(url, data, headers);
     return res
 
 
@@ -49,11 +50,12 @@ export const trashNote = async (id) => {
 export const findNote = async (id) => {
     if (id) {
 
-        const url = `${baseUrl}/${id}`;
+        const url = `${baseUrl}/${id}/getnote`;
         const res = await axios.get(url, headers);
         return res;
     }
 }
+
 
 export const editNote = async (id, data) => {
 
@@ -110,4 +112,93 @@ export const deleteNote = async (id) => {
     } else {
         console.log("id not found=====>")
     }
+}
+
+
+// labels
+
+export const getlabel = async () => {
+    const url = `${baseUrl}/label`;
+    const res = await axios.get(url, headers);
+    return res;
+}
+
+// create label
+export const addlabel = async (id, label) => {
+    const url = `${baseUrl}/${id}/label`;
+    const res = await axios.post(url, label, headers);
+    return res;
+}
+
+// update label
+export const updatelabel = async (id, label) => {
+    const url = `${baseUrl}/${id}/updatelabel`;
+    const res = await axios.post(url, label, headers);
+    return res;
+}
+// delete label
+export const deletelabel = async (id, label) => {
+    const url = `${baseUrl}/${id}/deletelabel`;
+    const res = await axios.delete(url, {
+        data: { label },
+        ...headers,
+    });
+    return res;
+}
+
+
+// collabaorators
+// get collaborators
+export const getcollabaorator = async (id) => {
+    const url = `${baseUrl}/${id}/collaborators`;
+    const res = await axios.get(url, headers);
+    return res;
+}
+
+// add collaborators
+
+export const addcollaborators = async (id, emailid) => {
+    const url = `${baseUrl}/${id}/collaborators`;
+    const res = await axios.post(url, emailid, headers);
+    return res;
+}
+// delete collaborator
+export const deletecollaborators = async (id, emailid) => {
+    const url = `${baseUrl}/${id}/collaborators`;
+    const res = await axios.delete(url, { data: { emailid: emailid }, ...headers });
+    return res;
+}
+
+
+// reminder
+
+// {
+//   "date": "2025-08-29",
+//   "time": "14:30:00",
+//   "repeat": "weekly",
+//   "repeat_custom": {
+//     "daysOfWeek": [1, 3, 5],
+//     "interval": 2,
+//     "endDate": "2025-12-31"
+//   }
+// }
+
+// get reminder
+export const getreminder = async (id) => {
+    const url = `${baseUrl}/${id}/reminder`;
+    const res = await axios.get(url, headers);
+    return res;
+}
+// add reminder
+export const addreminder = async (id, reminder) => {
+    const url = `${baseUrl}/${id}/reminder`;
+    const res = await axios.post(url, reminder, headers);
+    return res;
+}
+
+// delete reminder
+export const deletereminder = async (id) => {
+    const url = `${baseUrl}/${id}/reminder`;
+    const res = await axios.delete(url, headers);
+    return res;
 }

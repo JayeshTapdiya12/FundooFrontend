@@ -141,6 +141,7 @@ export default function SideNav({ tab, view, modeValue, filt }) {
         filt(value)
     }
 
+    const sidenav = ['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Trash'];
     return (
         <Box sx={{ display: 'flex' }} style={{ backgroundColor: "#202124" }}>
             <CssBaseline />
@@ -177,8 +178,10 @@ export default function SideNav({ tab, view, modeValue, filt }) {
 
 
                 <List style={{ backgroundColor: "#202124", height: "100%" }} >
-                    {['Notes', 'Reminder', 'Edit Labels', 'Archive', 'Trash'].map((text, index) => (
-                        <Link to={link[index]} onClick={() => handleChange(tabs[index])}>
+                    {sidenav.map((text, index) => (
+
+
+                        <Link to={link[index]} onClick={() => handleChange(tabs[index])} style={{ textDecoration: "none" }}>
                             <ListItem key={text} disablePadding sx={{ display: 'block' }} style={{ backgroundColor: "#202124", color: "white", marginLeft: "10px" }} >
                                 <ListItemButton
                                     sx={{

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Navigate } from 'react-router-dom';
 
-const baseUrl = "https://fundoo-notes-chi.vercel.app//users/";
+const baseUrl = "http://localhost:3000/api/v1/users/";
 
 export const login = (value) => {
     let data = {
@@ -11,6 +11,7 @@ export const login = (value) => {
     // const baseUrl = "http://localhost:3000/api/v1/users/";
 
     let res = axios.post(baseUrl + 'login', data)
+
     return res
 }
 
